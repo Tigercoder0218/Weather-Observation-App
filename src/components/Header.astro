@@ -1,32 +1,19 @@
 ---
 import Logo from "./SVG/Logo";
-import MapPin from "./SVG/MapPin";
+import SearchBar from "./SearchBar";
 ---
 
 <header
-	class="flex justify-between items-center mx-4 my-2 px-2 py-1 bg-black/40 rounded"
+	class="flex justify-between items-center mx-4 my-2 px-2 py-1 bg-black/40 rounded overflow-hidden"
 >
 	<div class="flex_center gap-4" id="LOGOID">
 		<Logo width="40px" height="40px" />
-		<h1 class="text-[1.25em] font-bold">VORTEXTA</h1>
+		<h1 class="hidden sm:block text-[1.25em] font-bold">VORTEXTA</h1>
 	</div>
 
-	<form onsubmit="
-	handleSearch
-" class="flex_center gap-2">
-		<input
-			type="text"
-			id="SearchBar"
-			class="min-w-[400px] min-h-[30px] px-4 rounded border-none outline-none text-black"
-			placeholder="Search City"
-		/>
+	<SearchBar client:load />
 
-		<button class="p-1 hover:bg-black/60 rounded-full">
-			<MapPin width="25px" height="25px" />
-		</button>
-	</form>
-
-	<nav class="flex_center gap-4">
+	<nav class="hidden sm:flex flex_center gap-4">
 		<a class="link" href="/">Home</a>
 		<a class="link" href="/about">About</a>
 		<a class="link" href="#">Portfolio</a>
@@ -38,19 +25,3 @@ import MapPin from "./SVG/MapPin";
 		@apply px-2 rounded text-[1.1em] hover:translate-y-[-0.25em] transition-transform;
 	}
 </style>
-
-<script>
-	import { FetchWeather } from "../hooks/useFetchWeather";
-	const SearchBar = document.querySelector("#SearchBar");
-
-	const handleSearch = (e: FormDataEvent) => {
-		e.preventDefault();
-		const query = SearchBar?.nodeValue;
-		console.log(query);
-
-		if (query) {
-			const data = FetchWeather(query);
-			console.log(data);
-		}
-	};
-</script>
