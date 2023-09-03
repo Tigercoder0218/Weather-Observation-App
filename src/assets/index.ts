@@ -1,5 +1,6 @@
+import type { ImageMetadata } from "astro";
 type WeatherImages = {
-    [key: string]: string;
+    [key: string]: ImageMetadata;
 };
 
 // Weather Logo Images
