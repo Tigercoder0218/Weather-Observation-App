@@ -8,7 +8,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -17,6 +17,13 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Lexend&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<Header />
@@ -26,8 +33,9 @@ const { title } = Astro.props;
 
 <style is:global>
 	:root {
-		--baseClr: #242424;
-		--textClr: #fafafa;
+		--baseClr: #fafafa;
+		--textClr: #242424;
+		--lexend: "Lexend", sans-serif;
 	}
 
 	* {

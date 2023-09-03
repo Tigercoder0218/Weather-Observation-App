@@ -41,6 +41,7 @@ export const FetchWeatherPosition = async (pos: LocationType) => {
 
         const lat = data?.coord?.lat
         const lon = data?.coord?.lon
+        console.log("POS:", data)
         FetchForecast(lat, lon)
 
         return data
