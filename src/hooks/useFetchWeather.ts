@@ -1,3 +1,5 @@
+import { toast } from "react-hot-toast"
+
 interface LocationType {
     latitude: string,
     longitude: string,
@@ -16,12 +18,17 @@ export const FetchWeatherQuery = async (query: string) => {
     try {
         const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
         const data = await res.json()
+        console.log(data)
+        if (data?.cod == 200) {
+            const lat = data?.coord?.lat
+            const lon = data?.coord?.lon
+            FetchForecast(lat, lon)
 
-        const lat = data?.coord?.lat
-        const lon = data?.coord?.lon
-        FetchForecast(lat, lon)
-
-        return data
+            return data
+        } else {
+            toast.error("Invalid City name!")
+            throw new Error("Invalid City name!");
+        }
     } catch (err) {
         console.log("ERROR:", err)
     }
@@ -39,12 +46,17 @@ export const FetchWeatherPosition = async (pos: LocationType) => {
         const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
         const data = await res.json()
 
-        const lat = data?.coord?.lat
-        const lon = data?.coord?.lon
-        console.log("POS:", data)
-        FetchForecast(lat, lon)
+        if (data?.cod == 200) {
+            const lat = data?.coord?.lat
+            const lon = data?.coord?.lon
+            console.log("POS:", data)
+            FetchForecast(lat, lon)
 
-        return data
+            return data
+        } else {
+            toast.error("Invalid Position coordinates!")
+            throw new Error("Invalid Position coordinates!");
+        }
     } catch (err) {
         console.log("ERROR:", err)
     }
@@ -60,8 +72,18 @@ const FetchForecast = async (lat: string, lon: string) => {
         appid: API_KEY,
     })
 
-    const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
-    const data = await res.json()
-    console.log("Forecast:", data)
-    return data
+    try {
+        const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
+        const data = await res.json()
+
+        console.log("Forecast:", data)
+        if (data?.cod == 200) {
+            return data
+        } else {
+            toast.error("Invalid Forecast coordinates!")
+            throw new Error("Invalid Forecast coordinates!");
+        }
+    } catch (err) {
+        console.log("ERROR:", err)
+    }
 }
