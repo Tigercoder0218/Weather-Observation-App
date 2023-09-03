@@ -1,17 +1,19 @@
-import { WeatherIcons } from '../assets'
-import { weather } from '../store/weatherStore'
-import { useStore } from '@nanostores/react'
+import { useStore } from "@nanostores/react";
+import { WeatherIcons } from "../assets";
+import { imageCode } from "../store/weatherStore";
 
-const WeatherIcon = () => {
-    const $weather = useStore(weather)
+type Props = {
+    size?: string;
+}
 
+const WeatherIcon = ({ size = "125" }: Props) => {
+    const $imageCode = useStore(imageCode)
     return (
         <img
-            src={WeatherIcons[$weather?.weather[0].icon || "default"]}
-            alt="BG_Img"
-            width="200px"
-            height="200px"
-            className="" />
+            src={WeatherIcons[$imageCode].src}
+            width={size}
+            height={size}
+            alt="Weather_Icon" />
     )
 }
 
