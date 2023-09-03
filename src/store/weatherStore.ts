@@ -4,3 +4,5 @@ import { atom } from "nanostores";
 export const weather = atom<weatherType | null>(null)
 
 export const imageCode = atom<string>("default")
+
+export const imperialUnit = atom<boolean>(false)
