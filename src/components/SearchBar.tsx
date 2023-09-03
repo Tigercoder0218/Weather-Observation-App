@@ -51,20 +51,20 @@ const SearchBar = () => {
     }, [])
 
     return (
-        <div className="flex_center gap-2">
-            <form onSubmit={HandleSearch}>
+        <>
+            <form onSubmit={HandleSearch} className='w-full'>
                 <input
                     type="text"
                     onChange={(e) => setQuery(e.currentTarget.value)}
-                    className="w-full sm:min-w-[400px] min-h-[30px] px-4 rounded border-none outline-none text-black"
+                    className="w-full sm:min-w-[400px] h-[35px] px-4 rounded border-none outline-none text-black"
                     placeholder="Search City"
                 />
             </form>
 
-            <button type='button' className="p-1 hover:bg-black/60 rounded-full" onClick={HandleGeoLocation}>
-                <MapPin width="25px" height="25px" />
+            <button type='button' className="sm:hidden p-1 bg-black/20 rounded" onClick={HandleGeoLocation}>
+                <MapPin width="28px" height="28px" />
             </button>
-        </div>
+        </>
     )
 }
 

@@ -69,11 +69,11 @@ const CoverImage = ({ background }: Props) => {
         }
 
         // Set Font color based on background contrast
-        if ($imageCode?.includes("d")) {
-            document.documentElement.style.setProperty("--textClr", "#fff")
-        } else {
-            document.documentElement.style.setProperty("--textClr", "#fff")
-        }
+        // if ($imageCode?.includes("d")) {
+        //     document.documentElement.style.setProperty("--textClr", "#000")
+        // } else {
+        //     document.documentElement.style.setProperty("--textClr", "#fff")
+        // }
     }, [$imageCode])
 
     return (

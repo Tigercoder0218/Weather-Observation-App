@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 ---
 
 <header
-	class="flex justify-between items-center mx-4 my-2 px-2 py-1 overflow-hidden bg-black/20 backdrop-blur-sm rounded-lg"
+	class="flex gap-4 sm:justify-between items-center mx-4 my-2 px-2 py-1 overflow-hidden bg-black/20 backdrop-blur-sm rounded-lg"
 >
 	<div class="flex_center gap-4" id="LOGOID">
 		<Logo width="40px" height="40px" />
@@ -13,7 +13,7 @@ import SearchBar from "./SearchBar";
 
 	<SearchBar client:load />
 
-	<nav class="hidden sm:flex flex_center gap-4">
+	<nav class="hidden sm:flex justify-center items-center gap-4">
 		<a class="link" href="/">Home</a>
 		<a class="link" href="/about">About</a>
 		<a class="link" href="#">Portfolio</a>
