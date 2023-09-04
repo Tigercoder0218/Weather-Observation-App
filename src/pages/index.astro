@@ -1,5 +1,6 @@
 ---
-import CoverImage from "../components/CoverImage";
+import CoverImage from "../components/React/CoverImage";
+import TimeCard from "../components/TimeCard.astro";
 import WeatherCard from "../components/WeatherCard.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -8,7 +9,7 @@ import Layout from "../layouts/Layout.astro";
 	<main class="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4">
 		<WeatherCard />
 
-		<div class="bg-black/20 backdrop-blur-md rounded-lg"></div>
+		<TimeCard />
 	</main>
 
 	<CoverImage background client:load />
