@@ -1,5 +1,5 @@
-import { imageCode } from "../store/weatherStore";
-import { DesktopImg, MobileImg } from "../assets";
+import { imageCode } from "../../store/weatherStore";
+import { DesktopImg, MobileImg } from "../../assets";
 import { useStore } from "@nanostores/react"
 import { useEffect } from "react";
 

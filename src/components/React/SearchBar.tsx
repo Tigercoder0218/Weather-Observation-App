@@ -1,8 +1,8 @@
 import type { FormEvent } from 'react'
 import { useState, useEffect } from 'react'
-import { FetchWeatherQuery, FetchWeatherPosition } from '../hooks/useFetchWeather';
-import MapPin from './SVG/MapPin';
-import { imageCode, weather } from '../store/weatherStore';
+import { FetchWeatherQuery, FetchWeatherPosition } from '../../hooks/useFetchWeather';
+import MapPin from '../SVG/MapPin';
+import { imageCode, weather } from '../../store/weatherStore';
 import { toast } from 'react-hot-toast';
 
 const SearchBar = () => {
