@@ -4,7 +4,7 @@ type Props = {
     className?: string,
 }
 
-const Logo = ({ width = "50px", height = "50px", className = "" }: Props) => {
+const MapPin = ({ width = "50px", height = "50px", className = "" }: Props) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
             width={width}
@@ -17,4 +17,4 @@ const Logo = ({ width = "50px", height = "50px", className = "" }: Props) => {
     )
 }
 
-export default Logo
+export default MapPin

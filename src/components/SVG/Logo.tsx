@@ -12,7 +12,7 @@ const Logo = ({ width = "50px", height = "50px", className = "" }: Props) => {
             viewBox="0 0 95 95"
             width={width}
             height={height}
-            className={`animate-[spin_2s_linear_infinite_reverse]` + className}>
+            className={`animate-[spin_2s_linear_infinite_reverse] ${className}`}>
             <path
                 fill="url(#paint0_radial_635_218)"
                 d="M47.5 58.5C32.586 65.9 14.812 65.6 0 57.4c1.124 5 2.962 9.7 5.516 13.9 3.575 6 10.828 9.1 17.672 7.5 3.269-.7 6.436-2 9.5-3.7C39.43 71.3 44.64 65.5 47.5 58.5z"
