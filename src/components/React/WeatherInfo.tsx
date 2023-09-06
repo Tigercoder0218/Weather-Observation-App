@@ -38,22 +38,28 @@ export const WeatherMain = () => {
 
 export const TimeInfo = () => {
     const [time, setTime] = useState<string>("")
+    const $weather = useStore(weather)
 
     useEffect(() => {
-        const TimeLoop = setInterval(() => {
-            let newTime = moment().format("LTS")
-            setTime(newTime)
-            console.log(newTime)
-        }, 1000)
-        console.log(TimeLoop)
+        if ($weather) {
+            const TimeLoop = setInterval(() => {
+                const offsetSeconds = $weather?.timezone / 3600;
+                console.log(offsetSeconds, $weather?.timezone)
+                const formattedTime = moment().utcOffset(offsetSeconds).format("LTS");
+                setTime(formattedTime);
+            }, 1000);
 
-        return () => clearInterval(TimeLoop)
-    }, [])
+            return () => clearInterval(TimeLoop);
+        }
+    }, [$weather]);
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
             <span className='text-[1.5em]'>{moment().format("Do MMMM YYYY")}</span>
-            <span className='text-[3em] tracking-wider relative'>{time}</span>
+            <div className="flex flex-col items-end leading-none">
+                <span className='text-[3em] tracking-wider relative'>{time}</span>
+                <span className="px-1.5 tracking-widest opacity-80 capitalize">{$weather?.name}</span>
+            </div>
         </div>
     )
 }
