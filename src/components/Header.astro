@@ -1,14 +1,20 @@
 ---
-import Logo from "./SVG/Logo";
 import SearchBar from "./React/SearchBar";
+import VortexSVG from "../assets/vortex.svg";
 ---
 
 <header
 	class="flex gap-4 sm:justify-between items-center mx-4 my-2 px-2 py-2 overflow-hidden bg-black/20 backdrop-blur-md rounded-lg"
 >
-	<div class="flex_center gap-4" id="LOGOID">
-		<Logo width="40px" height="40px" />
-		<h1 class="hidden sm:block text-[1.25em] font-bold">VORTEXTA</h1>
+	<div class="flex_center gap-4">
+		<img
+			src={VortexSVG.src}
+			width="40px"
+			height="40px"
+			class="animate-[spin_2s_linear_infinite_reverse]"
+		/>
+
+		<h1 class="hidden sm:flex text-[1.25em] font-bold">VORTEXTA</h1>
 	</div>
 
 	<SearchBar client:load />

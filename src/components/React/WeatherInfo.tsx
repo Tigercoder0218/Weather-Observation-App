@@ -44,7 +44,6 @@ export const TimeInfo = () => {
         if ($weather) {
             const TimeLoop = setInterval(() => {
                 const offsetSeconds = $weather?.timezone / 3600;
-                console.log(offsetSeconds, $weather?.timezone)
                 const formattedTime = moment().utcOffset(offsetSeconds).format("LTS");
                 setTime(formattedTime);
             }, 1000);

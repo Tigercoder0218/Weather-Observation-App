@@ -1,17 +1,16 @@
 type Props = {
-    width?: string,
-    height?: string,
+    size?: string,
     className?: string,
 }
 
-const Logo = ({ width = "50px", height = "50px", className = "" }: Props) => {
+const LogoSVG = ({ size = "50px", className = "" }: Props) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 95 95"
-            width={width}
-            height={height}
+            width={size}
+            height={size}
             className={`animate-[spin_2s_linear_infinite_reverse] ${className}`}>
             <path
                 fill="url(#paint0_radial_635_218)"
@@ -124,4 +123,4 @@ const Logo = ({ width = "50px", height = "50px", className = "" }: Props) => {
     )
 }
 
-export default Logo
+export default LogoSVG

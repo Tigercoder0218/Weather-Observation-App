@@ -68,14 +68,12 @@ const SearchBar = () => {
     }, [])
 
     return (
-        <div className='flex_center gap-4 w-full'>
-
-
-            <form onSubmit={HandleSearch} className='w-full sm:max-w-[400px]'>
+        <div className='flex_center gap-4 w-full sm:max-w-[400px]'>
+            <form onSubmit={HandleSearch} className='w-full'>
                 <input
                     type="text"
                     onChange={(e) => setQuery(e.currentTarget.value)}
-                    className="w-full  h-[35px] px-4 rounded border-none outline-none text-black"
+                    className="w-full h-[35px] px-4 rounded border-none outline-none text-black"
                     placeholder="Search City"
                 />
             </form>
