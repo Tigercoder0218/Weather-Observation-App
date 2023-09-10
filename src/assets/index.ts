@@ -3,6 +3,10 @@ type WeatherImages = {
     [key: string]: ImageMetadata;
 };
 
+export { default as VortexSVG } from "./icons/vortex.svg"
+export { default as SunriseSVG } from "./icons/sunrise.svg"
+export { default as SunsetSVG } from "./icons/sunset.svg"
+
 // Weather Logo Images
 import Day from "./icons/01d.svg"
 import Night from "./icons/01n.svg"
