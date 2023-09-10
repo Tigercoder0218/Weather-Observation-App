@@ -1,7 +1,12 @@
 ---
+import BlurCard from "./BlurCard.astro";
 import { TimeInfo } from "./React/WeatherInfo";
 ---
 
-<section class="bg-black/20 backdrop-blur-md rounded-lg p-4">
-    <TimeInfo client:load />
+<section class="flex flex-col gap-2">
+    <BlurCard>
+        <TimeInfo client:load />
+    </BlurCard>
+
+    <BlurCard>yo</BlurCard>
 </section>
