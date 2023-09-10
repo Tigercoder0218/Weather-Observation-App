@@ -21,8 +21,7 @@ const WeatherIcon = ({ size = "125", hideText = false }: Props) => {
                     height={size}
                     alt="Weather_Icon" />
 
-                <span className="text-[1.8em]">{$weather?.weather[0]?.main}</span>
-                <span className="text-[1em] capitalize opacity-80">{$weather?.weather[0]?.description}</span>
+                <span className="text-[1.6em] capitalize">{$weather?.current?.condition?.text}</span>
             </div>
 
             <button type='button' className="absolute top-[0.5em] right-[0.5em] w-[50px] px-1 text-[1.6em] aspect-square bg-black/30 rounded-lg" onClick={() => imperialUnit.set(!$imperialUnit)}>

@@ -9,7 +9,7 @@ const Loader = () => {
     const $weather = useStore(weather)
 
     useEffect(() => {
-        if ($weather?.cod == 200) {
+        if ($weather !== null) {
             setIsLoading(false)
             document.body.style.overflow = "visible"
         }
@@ -18,7 +18,7 @@ const Loader = () => {
     return (
         <div
             style={isLoading ? { display: "flex" } : { display: "none" }}
-            className='absolute inset-0 w-screen h-screen bg-gradient-to-br from-blue-500 to-indigo-500 flex_center gap-[5em] z-10 flex-col'>
+            className='absolute inset-0 w-screen h-screen bg-gradient-to-br from-blue-400 to-indigo-400 flex_center gap-[5em] z-10 flex-col'>
             <div className="relative flex_center">
                 <CloudSVG className='absolute mr-[3em] mb-[3em]' />
                 <LogoSVG size='120px' />

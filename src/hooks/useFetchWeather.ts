@@ -6,24 +6,23 @@ interface LocationType {
 }
 
 const API_KEY = import.meta.env.PUBLIC_API_KEY as string
-const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`
+const BASE_URL = `https://api.weatherapi.com/v1/forecast.json`
 
 export const FetchWeatherQuery = async (query: string) => {
     const URL_Params = new URLSearchParams({
+        key: API_KEY,
         q: query,
-        units: "metric",
-        appid: API_KEY,
+        days: "1",
+        aqi: "yes",
+        alerts: "no"
     })
 
     try {
         const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
         const data = await res.json()
-        console.log(data)
-        if (data?.cod == 200) {
-            const lat = data?.coord?.lat
-            const lon = data?.coord?.lon
-            FetchForecast(lat, lon)
+        console.log("Fetch:", data)
 
+        if (!data.error) {
             return data
         } else {
             toast.error("Invalid City name!")
@@ -36,52 +35,23 @@ export const FetchWeatherQuery = async (query: string) => {
 
 export const FetchWeatherPosition = async (pos: LocationType) => {
     const URL_Params = new URLSearchParams({
-        lat: pos.latitude,
-        lon: pos.longitude,
-        units: "metric",
-        appid: API_KEY,
+        key: API_KEY,
+        q: `${pos.latitude},${pos.longitude}`,
+        days: "1",
+        aqi: "yes",
+        alerts: "no"
     })
 
     try {
         const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
         const data = await res.json()
+        console.log("GEO:", data)
 
-        if (data?.cod == 200) {
-            const lat = data?.coord?.lat
-            const lon = data?.coord?.lon
-            console.log("POS:", data)
-            FetchForecast(lat, lon)
-
+        if (!data.error) {
             return data
         } else {
             toast.error("Invalid Position coordinates!")
             throw new Error("Invalid Position coordinates!");
-        }
-    } catch (err) {
-        console.log("ERROR:", err)
-    }
-}
-
-const FetchForecast = async (lat: string, lon: string) => {
-    const BASE_URL = `https://api.openweathermap.org/data/2.5/forecast`
-
-    const URL_Params = new URLSearchParams({
-        lat: lat,
-        lon: lon,
-        units: "metric",
-        appid: API_KEY,
-    })
-
-    try {
-        const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
-        const data = await res.json()
-
-        console.log("Forecast:", data)
-        if (data?.cod == 200) {
-            return data
-        } else {
-            toast.error("Invalid Forecast coordinates!")
-            throw new Error("Invalid Forecast coordinates!");
         }
     } catch (err) {
         console.log("ERROR:", err)
