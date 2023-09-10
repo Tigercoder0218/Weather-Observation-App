@@ -1,41 +1,77 @@
 import { useStore } from '@nanostores/react'
 import { imperialUnit, weather } from '../../store/weatherStore'
-import { useEffect, useMemo, useState } from 'react'
-import moment from 'moment'
+import { useEffect, useState } from 'react'
+import moment from "moment-timezone"
 
-export const WeatherMain = () => {
+// Main Temperature and location
+export const WeatherMainInfo = () => {
     const [temp, setTemp] = useState<number>(0)
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
 
-    const fahrenheitTemp = useMemo(() => {
-        if ($weather) {
-            return $imperialUnit ? ($weather?.main?.temp * 9 / 5) + 32 : $weather?.main?.temp;
-        }
-        return 0; // default temp
-    }, [$imperialUnit, $weather]);
-
     useEffect(() => {
-        setTemp(fahrenheitTemp);
-    }, [fahrenheitTemp]);
+        if ($weather) {
+            setTemp($imperialUnit ? $weather?.current?.temp_f : $weather?.current?.temp_c)
+        }
+    }, [$imperialUnit, $weather]);
 
     if ($weather) {
         return (
-            <div className="flex flex-col self-end w-[190px]">
-                <div className="flex leading-none">
+            <div className="flex flex-col w-fit select-none">
+                <div className="flex_center items-start leading-none">
                     <span className='text-[6em]'>
-                        {parseInt(temp?.toString())}
+                        {parseInt(temp?.toString()) || "undefined"}
                     </span>
-                    <span className='text-[4em]'>°{$imperialUnit ? "F" : "C"}</span>
+                    <span className='text-[4.5em]'>°{$imperialUnit ? "F" : "C"}</span>
                 </div>
-                <span className='text-[1.5em]'>
-                    {$weather?.name + ", " + $weather?.sys?.country}
-                </span>
+                <div className='flex_center flex-col'>
+                    <span className='text-[1.8em]'>{$weather?.location?.name}</span>
+                    <p>{$weather?.location?.region + ($weather?.location?.region && " , ")} {$weather?.location?.country}</p>
+                </div>
             </div>
         )
     }
 }
 
+//Temperature related Info
+export const TempDetails = () => {
+    const $weather = useStore(weather)
+    const $imperialUnit = useStore(imperialUnit)
+
+    return (
+        <div className="flex gap-8 flex-col sm:flex-row">
+            <div className="flex_center flex-col p-1 rounded w-fit h-fit">
+                <span className='opacity-80'>Feels Like</span>
+                <span className='text-[1.5em]'>
+                    {$imperialUnit ?
+                        ($weather?.current.feelslike_f + "°F")
+                        : ($weather?.current.feelslike_c + "°C")
+                    }
+                </span>
+            </div>
+            <div className="flex_center flex-col p-1 rounded w-fit h-fit">
+                <span className='opacity-80'>Max Temp</span>
+                <span className='text-[1.5em]'>
+                    {$imperialUnit ?
+                        ($weather?.forecast.forecastday[0].day.maxtemp_f + "°F")
+                        : ($weather?.forecast.forecastday[0].day.maxtemp_c + "°C")
+                    }
+                </span>
+            </div>
+            <div className="flex_center flex-col p-1 rounded w-fit h-fit">
+                <span className='opacity-80'>Min Temp</span>
+                <span className='text-[1.5em]'>
+                    {$imperialUnit ?
+                        ($weather?.forecast.forecastday[0].day.mintemp_f + "°F")
+                        : ($weather?.forecast.forecastday[0].day.mintemp_c + "°C")
+                    }
+                </span>
+            </div>
+        </div>
+    )
+}
+
+//Formatted Time and Date
 export const TimeInfo = () => {
     const [time, setTime] = useState<string>("")
     const $weather = useStore(weather)
@@ -43,8 +79,7 @@ export const TimeInfo = () => {
     useEffect(() => {
         if ($weather) {
             const TimeLoop = setInterval(() => {
-                const offsetSeconds = $weather?.timezone / 3600;
-                const formattedTime = moment().utcOffset(offsetSeconds).format("LTS");
+                const formattedTime = moment().tz($weather?.location?.tz_id).format("LTS");
                 setTime(formattedTime);
             }, 1000);
 
@@ -54,10 +89,14 @@ export const TimeInfo = () => {
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
-            <span className='text-[1.5em]'>{moment().format("Do MMMM YYYY")}</span>
+            <div className="flex flex-col items-start">
+                <span className='tracking-widest opacity-80 capitalize'>Today</span>
+                <span className='text-[1.8em]'>{moment().format("Do MMMM YYYY")}</span>
+            </div>
+
             <div className="flex flex-col items-end leading-none">
                 <span className='text-[3em] tracking-wider relative'>{time}</span>
-                <span className="px-1.5 tracking-widest opacity-80 capitalize">{$weather?.name}</span>
+                <span className="px-1.5 tracking-widest opacity-80 capitalize">{$weather?.location?.tz_id || "undefined"}</span>
             </div>
         </div>
     )

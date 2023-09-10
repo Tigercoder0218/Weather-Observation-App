@@ -1,22 +1,24 @@
 import type { FormEvent } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FetchWeatherQuery, FetchWeatherPosition } from '../../hooks/useFetchWeather';
 import MapPin from '../SVG/MapPin';
-import { imageCode, weather } from '../../store/weatherStore';
+import { weather } from '../../store/weatherStore';
 import { toast } from 'react-hot-toast';
+import { weatherIconCode } from '../../hooks/useIconCode';
 
 const SearchBar = () => {
-    const [query, setQuery] = useState<string>("karnataka")
+    const [query, setQuery] = useState<string>("mangalore")
+    const SearchRef = useRef<HTMLInputElement>(null)
 
     const HandleSearch = async (e?: FormEvent<HTMLFormElement>) => {
         e?.preventDefault()
-        // console.log(query);
+        if (!query) return
 
-        if (query) {
-            const data = await FetchWeatherQuery(query);
-            // console.log(data);
+        const data = await FetchWeatherQuery(query);
+        // console.log("DOTAAA", data);
+        if (data) {
             weather.set(data)
-            imageCode.set(data?.weather[0]?.icon)
+            weatherIconCode()
         }
     };
 
@@ -29,7 +31,7 @@ const SearchBar = () => {
         try {
             const data = await FetchWeatherPosition(pos);
             weather.set(data)
-            imageCode.set(data?.weather[0]?.icon)
+            weatherIconCode()
         } catch (error) {
             console.log(error)
         }
@@ -47,11 +49,17 @@ const SearchBar = () => {
             default: toast.error(error.message)
         }
 
-        // If geolocation access is denied, fetch results for "karnataka" by default
+        // If geolocation access is denied, fetch results for "mangalore" by default
+        if (query == "") setQuery("Mangalore")
         HandleSearch()
     }
 
     const HandleGeoLocation = async () => {
+        if (SearchRef.current?.value) {
+            //Reset Searchbar value on geolocation btn click
+            SearchRef.current.value = ""
+        }
+
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 setPosition, handleError,
@@ -64,7 +72,11 @@ const SearchBar = () => {
 
     useEffect(() => {
         //Get User Location automatically onLoad
-        HandleGeoLocation()
+        // HandleGeoLocation()
+
+        // Initial Fetch
+        if (query == "") setQuery("Mangalore")
+        HandleSearch()
     }, [])
 
     return (
@@ -75,10 +87,11 @@ const SearchBar = () => {
                     onChange={(e) => setQuery(e.currentTarget.value)}
                     className="w-full h-[35px] px-4 rounded border-none outline-none text-black"
                     placeholder="Search City"
+                    ref={SearchRef}
                 />
             </form>
 
-            <button type='button' className="p-1 bg-black/20 rounded" onClick={HandleGeoLocation}>
+            <button type='button' title='Current Location' className="p-1 bg-black/20 rounded" onClick={HandleGeoLocation}>
                 <MapPin width="28px" height="28px" />
             </button>
         </div>
