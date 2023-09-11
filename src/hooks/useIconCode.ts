@@ -62,10 +62,9 @@ export const weatherIconCode = async () => {
     if ($weather) {
         const IconCode = IconMapping[$weather?.current?.condition?.code]
         const isDay = $weather?.current?.is_day ? "d" : "n"
-        console.log(IconCode + isDay)
+        // console.log(IconCode + isDay)
         imageCode.set(IconCode + isDay)
     } else {
         imageCode.set('default')
     }
-
 }

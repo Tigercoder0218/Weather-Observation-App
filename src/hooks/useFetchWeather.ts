@@ -12,7 +12,7 @@ export const FetchWeatherQuery = async (query: string) => {
     const URL_Params = new URLSearchParams({
         key: API_KEY,
         q: query,
-        days: "1",
+        days: "2",
         aqi: "yes",
         alerts: "no"
     })
@@ -37,7 +37,7 @@ export const FetchWeatherPosition = async (pos: LocationType) => {
     const URL_Params = new URLSearchParams({
         key: API_KEY,
         q: `${pos.latitude},${pos.longitude}`,
-        days: "1",
+        days: "2",
         aqi: "yes",
         alerts: "no"
     })

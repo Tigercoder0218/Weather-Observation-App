@@ -1,19 +1,21 @@
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
-import { weather } from '../../store/weatherStore'
+import { imageCode } from '../../store/weatherStore'
 import CloudSVG from '../SVG/CloudSVG'
 import LogoSVG from '../SVG/LogoSVG'
 
 const Loader = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const $weather = useStore(weather)
+    const $imageCode = useStore(imageCode)
 
     useEffect(() => {
-        if ($weather !== null) {
-            setIsLoading(false)
-            document.body.style.overflow = "visible"
+        if (isLoading && $imageCode !== "default") {
+            setTimeout(() => {
+                setIsLoading(false)
+                document.body.style.overflow = "visible"
+            }, 100)
         }
-    }, [$weather])
+    }, [$imageCode])
 
     return (
         <div

@@ -1,0 +1,20 @@
+---
+import BlurCard from "./BlurCard.astro";
+import { SunDetails, TimeCard } from "./React/TimeInfo";
+import WindCard from "./React/WindCard";
+---
+
+<section class="flex flex-col gap-2">
+    <BlurCard>
+        <TimeCard client:load />
+    </BlurCard>
+
+    <div class="flex gap-2">
+        <BlurCard>
+            <WindCard client:load />
+        </BlurCard>
+        <BlurCard>
+            <SunDetails client:load />
+        </BlurCard>
+    </div>
+</section>
