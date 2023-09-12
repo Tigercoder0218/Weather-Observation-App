@@ -20,19 +20,20 @@ export const TimeCard = () => {
         }
     }, [$weather]);
 
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
-            <div className="flex flex-col items-end leading-none">
-                <span className='text-[3em] tracking-wider relative'>{time}</span>
-                <span className="px-1.5 tracking-widest opacity-80 capitalize">{$weather?.location?.tz_id || "undefined"}</span>
-            </div>
+    if ($weather)
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
+                <div className="flex flex-col items-end leading-none">
+                    <span className='text-[3em] tracking-wider relative'>{time}</span>
+                    <span className="px-1.5 tracking-widest opacity-80 capitalize">{$weather?.location?.tz_id || "undefined"}</span>
+                </div>
 
-            <div className="flex flex-col items-start sm:order-first">
-                <span className='tracking-widest opacity-80 capitalize'>Today</span>
-                <span className='text-[1.8em]'>{moment().format("Do MMMM YYYY")}</span>
+                <div className="flex flex-col items-start sm:order-first">
+                    <span className='tracking-widest opacity-80 capitalize'>Today</span>
+                    <span className='text-[1.8em]'>{moment().format("Do MMMM YYYY")}</span>
+                </div>
             </div>
-        </div>
-    )
+        )
 }
 
 // Sunrise & Sunset Info
@@ -105,55 +106,56 @@ export const SunDetails = () => {
         }
     }
 
-    return (
-        <div className="grid grid-cols-1 justify-center items-center gap-2 w-full h-full">
-            <svg viewBox="0 0 223 114" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-full max-w-[200px] px-6 mx-auto'>
-                <path d="M2 111.5C2 111.5 35.716 97.5728 57.5 58.5C89 2 106 2 111.5 2C117 2 134 2 171 60C195.516 97.4192 221 111.5 221 111.5" stroke="url(#paint0_linear_658_2)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-                <defs>
-                    <linearGradient id="paint0_linear_658_2" x1="111.5" y1="2" x2="111.5" y2="111.5" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="white" />
-                        <stop offset="1" stopColor="white" stopOpacity="0" />
-                    </linearGradient>
-                </defs>
-                <circle
-                    ref={SunDotRef}
-                    cx={coords.x}
-                    cy={coords.y}
-                    fill='#FF6B00'
-                    stroke='#FFD600'
-                    strokeWidth={3}
-                    r="7"
-                />
-            </svg>
+    if ($weather)
+        return (
+            <div className="grid grid-cols-1 justify-center items-center gap-2 w-full h-full">
+                <svg viewBox="0 0 223 114" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-full max-w-[200px] px-6 mx-auto'>
+                    <path d="M2 111.5C2 111.5 35.716 97.5728 57.5 58.5C89 2 106 2 111.5 2C117 2 134 2 171 60C195.516 97.4192 221 111.5 221 111.5" stroke="url(#paint0_linear_658_2)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                    <defs>
+                        <linearGradient id="paint0_linear_658_2" x1="111.5" y1="2" x2="111.5" y2="111.5" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="white" />
+                            <stop offset="1" stopColor="white" stopOpacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <circle
+                        ref={SunDotRef}
+                        cx={coords.x}
+                        cy={coords.y}
+                        fill='#FF6B00'
+                        stroke='#FFD600'
+                        strokeWidth={3}
+                        r="7"
+                    />
+                </svg>
 
-            <div className="flex justify-between gap-2 leading-none w-full relative">
-                <div className="flex justify-between absolute -top-2 sm:-top-6 w-full">
-                    <img src={SunriseSVG.src} alt="SunriseSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
-                    <img src={SunsetSVG.src} alt="SunsetSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
+                <div className="flex justify-between gap-2 leading-none w-full relative">
+                    <div className="flex justify-between absolute -top-2 sm:-top-6 w-full">
+                        <img src={SunriseSVG.src} alt="SunriseSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
+                        <img src={SunsetSVG.src} alt="SunsetSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-6">
+                        <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunrise</span>
+                        <span className='text-[1.1em] sm:text-[1.3em]'>{sunRiseStr}</span>
+                    </div>
+                    <div className="flex items-end flex-col gap-2 mt-6">
+                        <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunset</span>
+                        <span className='text-[1.1em] sm:text-[1.3em]'>{sunSetStr}</span>
+                    </div>
                 </div>
 
-                <div className="flex flex-col gap-2 mt-6">
-                    <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunrise</span>
-                    <span className='text-[1.1em] sm:text-[1.3em]'>{sunRiseStr}</span>
-                </div>
-                <div className="flex items-end flex-col gap-2 mt-6">
-                    <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunset</span>
-                    <span className='text-[1.1em] sm:text-[1.3em]'>{sunSetStr}</span>
+                <div className="flex justify-between items-center gap-2 w-full self-end">
+                    <img
+                        src={MoonIcons[moonPhase.replaceAll(" ", "_")].src}
+                        alt="MoonPhase"
+                        className='w-[40px] h-[40px] sm:w-[45px] sm:h-[45px]'
+                    />
+
+                    <div className="flex flex-col">
+                        <span className='text-[0.8em] sm:text-[1em] opacity-80'>Moon Phase</span>
+                        <span className='text-[1em] sm:text-[1.3em]'>{moonPhase}</span>
+                    </div>
                 </div>
             </div>
-
-            <div className="flex justify-between items-center gap-2 w-full self-end">
-                <img
-                    src={MoonIcons[moonPhase.replaceAll(" ", "_")].src}
-                    alt="MoonPhase"
-                    className='w-[40px] h-[40px] sm:w-[45px] sm:h-[45px]'
-                />
-
-                <div className="flex flex-col">
-                    <span className='text-[0.8em] sm:text-[1em] opacity-80'>Moon Phase</span>
-                    <span className='text-[1em] sm:text-[1.3em]'>{moonPhase}</span>
-                </div>
-            </div>
-        </div>
-    )
+        )
 }

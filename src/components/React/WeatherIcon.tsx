@@ -12,27 +12,28 @@ const WeatherIcon = ({ size = "125", hideText = false }: Props) => {
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
 
-    return (
-        <div className="self-start">
-            <div className="flex_center flex-col leading-tight">
-                <img
-                    src={WeatherIcons[$imageCode].src}
-                    width={size}
-                    height={size}
-                    alt="Weather_Icon" />
+    if ($weather)
+        return (
+            <div className="self-start">
+                <div className="flex_center flex-col leading-tight">
+                    <img
+                        src={WeatherIcons[$imageCode].src}
+                        width={size}
+                        height={size}
+                        alt="Weather_Icon" />
 
-                <span className="text-[1.6em] capitalize">{$weather?.current?.condition?.text}</span>
+                    <span className="text-[1.6em] capitalize">{$weather?.current?.condition?.text}</span>
+                </div>
+
+                <button type='button' className="absolute top-[0.5em] right-[0.5em] w-[50px] px-1 text-[1.6em] aspect-square bg-black/30 rounded-lg" onClick={() => imperialUnit.set(!$imperialUnit)}>
+                    {$imperialUnit ?
+                        <span>°F</span>
+                        :
+                        <span>°C</span>
+                    }
+                </button>
             </div>
-
-            <button type='button' className="absolute top-[0.5em] right-[0.5em] w-[50px] px-1 text-[1.6em] aspect-square bg-black/30 rounded-lg" onClick={() => imperialUnit.set(!$imperialUnit)}>
-                {$imperialUnit ?
-                    <span>°F</span>
-                    :
-                    <span>°C</span>
-                }
-            </button>
-        </div>
-    )
+        )
 }
 
 export default WeatherIcon
