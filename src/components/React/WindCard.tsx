@@ -49,7 +49,7 @@ const WindCard = () => {
                     />
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 w-full">
                     <div className="flex gap-2">
                         <img src={WindSVG.src} alt="WindSVG" width={30} height={30} />
                         <div className='sm:min-w-[110px]'>
