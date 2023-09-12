@@ -36,7 +36,13 @@ const { title } = Astro.props;
 		<slot />
 
 		<!-- React-Hot-Toast Container -->
-		<Toaster position="bottom-center" client:load />
+		<Toaster
+			position="top-center"
+			containerStyle={{
+				top: 65,
+			}}
+			client:load
+		/>
 	</body>
 </html>
 

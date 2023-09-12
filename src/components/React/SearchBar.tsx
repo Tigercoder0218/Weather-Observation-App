@@ -19,6 +19,7 @@ const SearchBar = () => {
         if (data) {
             weather.set(data)
             weatherIconCode()
+            SearchRef.current?.blur()
         }
     };
 
