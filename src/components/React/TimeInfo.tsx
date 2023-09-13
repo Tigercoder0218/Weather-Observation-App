@@ -65,7 +65,7 @@ export const SunDetails = () => {
     const sunSetStr = $weather?.forecast?.forecastday[0]?.astro?.sunset
     const moonPhase = $weather?.forecast?.forecastday[0]?.astro?.moon_phase || "Waxing Crescent"
 
-    useMemo(() => {
+    useEffect(() => {
         const currentDate = moment().format("YYYY-MM-DD");
         const sunRiseTime = moment(`${currentDate} ${sunRiseStr}`, "YYYY-MM-DD hh:mm A").toDate().getTime();
         const sunSetTime = moment(`${currentDate} ${sunSetStr}`, "YYYY-MM-DD hh:mm A").toDate().getTime();
@@ -83,7 +83,7 @@ export const SunDetails = () => {
             SunDotRef?.current?.setAttribute("opacity", dotOpacity.toString());
             setCoords({ x, y })
         }
-    }, [$weather?.location])
+    }, [$weather?.location, SunDotRef?.current])
 
     function interpolate(progress: number, values: number[]) {
         const segment = (values.length - 1) * progress;
