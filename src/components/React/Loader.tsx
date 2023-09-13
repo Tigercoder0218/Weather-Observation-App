@@ -9,14 +9,14 @@ const Loader = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const $imageCode = useStore(imageCode)
 
-    // useEffect(() => {
-    //     if (isLoading && $imageCode !== "default") {
-    //         setTimeout(() => {
-    //             setIsLoading(false)
-    //             document.body.style.overflow = "visible"
-    //         }, 100)
-    //     }
-    // }, [$imageCode])
+    useEffect(() => {
+        if (isLoading && $imageCode !== "default") {
+            setTimeout(() => {
+                setIsLoading(false)
+                document.body.style.overflow = "visible"
+            }, 100)
+        }
+    }, [$imageCode])
 
     return (
         <div

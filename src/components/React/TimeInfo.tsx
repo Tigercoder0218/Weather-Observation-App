@@ -125,12 +125,12 @@ export const SunDetails = () => {
 
                     <div className="flex justify-between gap-2 leading-none w-full absolute bottom-0">
                         <div className="flex flex-col gap-2 mt-6">
-                            <img src={SunriseSVG.src} alt="SunriseSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
+                            <img src={SunriseSVG?.src} alt="SunriseSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
                             <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunrise</span>
                             <span className='text-[1.1em] sm:text-[1.3em]'>{sunRiseStr}</span>
                         </div>
                         <div className="flex items-end flex-col gap-2 mt-6">
-                            <img src={SunsetSVG.src} alt="SunsetSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
+                            <img src={SunsetSVG?.src} alt="SunsetSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
                             <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunset</span>
                             <span className='text-[1.1em] sm:text-[1.3em]'>{sunSetStr}</span>
                         </div>
@@ -142,7 +142,7 @@ export const SunDetails = () => {
 
                 <div className="flex justify-between items-center gap-2 w-full self-end">
                     <img
-                        src={MoonIcons[moonPhase.replaceAll(" ", "_")].src}
+                        src={MoonIcons[moonPhase?.replaceAll(" ", "_")]?.src}
                         alt="MoonPhase"
                         className='w-[40px] h-[40px] sm:w-[45px] sm:h-[45px]'
                     />
