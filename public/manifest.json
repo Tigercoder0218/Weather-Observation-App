@@ -1,0 +1,46 @@
+{
+    "name": "Vortexa | Weather Insights",
+    "short_name": "Vortexa",
+    "description": "Explore comprehensive weather insights and forecasts with Vortexa. Stay informed about current conditions, forecasts, and meteorological data, and gain valuable insights into weather patterns and trends.",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "start_url": ".",
+    "id": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "dir": "ltr",
+    "lang": "en",
+    "display_override": [
+        "standalone",
+        "fullscreen",
+        "window-controls-overlay"
+    ],
+    "categories": [
+        "weather",
+        "information"
+    ],
+    "icons": [
+        {
+            "src": "./icons/144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./icons/192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./icons/384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "./icons/512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
