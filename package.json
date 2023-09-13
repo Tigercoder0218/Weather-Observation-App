@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.0",
+    "@astrojs/react": "^3.0.2",
     "@astrojs/tailwind": "^5.0.0",
     "@nanostores/react": "^0.7.1",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "astro": "^3.0.3",
+    "astro": "^3.0.13",
     "moment-timezone": "^0.5.43",
     "nanostores": "^0.9.3",
     "react": "^18.2.0",
