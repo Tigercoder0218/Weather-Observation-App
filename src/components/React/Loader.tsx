@@ -27,12 +27,12 @@ const Loader = () => {
                     src={MobileImg["default"]?.src}
                     alt="Loader_BG_Img"
                     draggable={false}
-                    className="sm:hidden w-full h-screen fixed top-0 object-fill opacity-30" />
+                    className="sm:hidden w-full h-screen fixed top-0 object-cover opacity-20" />
                 <img
                     src={DesktopImg["default"]?.src}
                     alt="Loader_BG_Img"
                     draggable={false}
-                    className="hidden sm:block w-full h-screen fixed top-0 object-fill opacity-30" />
+                    className="hidden sm:block w-full h-screen fixed top-0 object-cover opacity-20" />
             </div>
 
             <div className="relative flex_center z-10">

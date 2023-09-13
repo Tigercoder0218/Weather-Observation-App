@@ -63,9 +63,11 @@ const CoverImage = ({ background }: Props) => {
         if (document.documentElement.clientWidth <= 640) {
             // Mobile Image Colors Avg
             document.documentElement.style.setProperty("--baseClr", M_Colors[$imageCode])
+            document.querySelector("meta[name='theme-color']")?.setAttribute("content", M_Colors[$imageCode]);
         } else {
             // Desktop Image Colors Avg
             document.documentElement.style.setProperty("--baseClr", D_Colors[$imageCode])
+            document.querySelector("meta[name='theme-color']")?.setAttribute("content", D_Colors[$imageCode]);
         }
 
         // Set Font color based on background contrast
