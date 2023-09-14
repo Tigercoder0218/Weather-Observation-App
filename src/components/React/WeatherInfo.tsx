@@ -18,10 +18,10 @@ export const WeatherMainInfo = () => {
         return (
             <div className="flex flex-col w-fit select-none">
                 <div className="flex_center items-start leading-none min-w-[200px]">
-                    <span className='text-[6em]'>
-                        {parseInt(temp?.toString()) || "--"}
+                    <span className='text-[5em] sm:text-[6em]'>
+                        {temp?.toFixed().toString() || "--"}
                     </span>
-                    <span className='text-[4.5em]'>°{$imperialUnit ? "F" : "C"}</span>
+                    <span className='text-[3em] sm:text-[4.5em]'>°{$imperialUnit ? "F" : "C"}</span>
                 </div>
                 <div className='flex_center flex-col'>
                     <span className='text-[1.8em]'>{$weather?.location?.name}</span>
