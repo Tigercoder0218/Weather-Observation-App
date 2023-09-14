@@ -2,12 +2,11 @@ const CacheName = "vortexa-V-1.0";
 const CacheList = [
     "icons/144.png",
 ];
-
 //Installing Service Worker
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CacheName).then((cache) => {
-            console.log("Checking Cache");
+            // console.log("Checking Cache");
             return cache.addAll(CacheList);
         })
     );

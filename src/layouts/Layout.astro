@@ -99,9 +99,6 @@ if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
 		navigator.serviceWorker
 			.register("/serviceWorker.js")
-			.then((Reg) => {
-				console.log("SW Registered: ", Reg.scope);
-			})
 			.catch((RegErr) => {
 				console.log("SW Registration failed: ", RegErr);
 			});
