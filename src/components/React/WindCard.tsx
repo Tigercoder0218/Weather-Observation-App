@@ -38,20 +38,20 @@ const WindCard = () => {
         return (
             <div className="flex_center flex-col gap-4 w-[100px] sm:w-[200px]">
                 <div className="relative flex_center">
-                    <img src={CompassSVG.src} alt="Arrow_Icon" width={100} height={100} draggable={false} />
+                    <img src={CompassSVG?.src} alt="Arrow_Icon" width={100} height={100} draggable={false} />
                     <img
-                        src={ArrowSVG.src}
+                        src={ArrowSVG?.src}
                         alt="Arrow_Icon"
                         width={15}
                         className='absolute'
                         draggable={false}
-                        style={{ rotate: $weather?.current?.wind_degree.toString() + "deg" }}
+                        style={{ rotate: $weather?.current?.wind_degree?.toString() + "deg" }}
                     />
                 </div>
 
                 <div className="flex flex-col gap-4 w-full">
                     <div className="flex gap-2">
-                        <img src={WindSVG.src} alt="WindSVG" width={30} height={30} />
+                        <img src={WindSVG?.src} alt="WindSVG" width={30} height={30} />
                         <div className='sm:min-w-[110px]'>
                             <span className='sm:text-[1.5em]'>{windSpeed?.toFixed()}</span>
                             <span className='text-[0.8em] sm:text-[1em] opacity-80'>{$imperialUnit ? " mph" : " km/h"}</span>
