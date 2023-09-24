@@ -5,9 +5,57 @@ import CloudSVG from '../SVG/CloudSVG'
 import LogoSVG from '../SVG/LogoSVG'
 import { DesktopImg, MobileImg } from '../../assets'
 
+type ColorType = {
+    [key: string]: string
+}
+
 const Loader = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const $imageCode = useStore(imageCode)
+
+    const D_Colors: ColorType = {
+        "01d": "#0875f6",
+        "01n": "#072b63",
+        "02d": "#027cf5",
+        "02n": "#061643",
+        "03d": "#0953e9",
+        "03n": "#08194c",
+        "04d": "#0442ae",
+        "04n": "#041448",
+        "09d": "#2a3e52",
+        "09n": "#091423",
+        "10d": "#c9dcdc",
+        "10n": "#0d223b",
+        "11d": "#0c1b41",
+        "11n": "#172450",
+        "13d": "#7ea1c7",
+        "13n": "#1a2236",
+        "50d": "#24a7f1",
+        "50n": "#113749",
+        "default": "#60a5fa",
+    }
+
+    const M_Colors: ColorType = {
+        "01d": "#0253f0",
+        "01n": "#031649",
+        "02d": "#0146e9",
+        "02n": "#041538",
+        "03d": "#0650b0",
+        "03n": "#0c0e3d",
+        "04d": "#103785",
+        "04n": "#020b44",
+        "09d": "#2a3e5e",
+        "09n": "#021933",
+        "10d": "#aaaeb4",
+        "10n": "#051728",
+        "11d": "#1c2b5f",
+        "11n": "#112552",
+        "13d": "#87a6c8",
+        "13n": "#11335c",
+        "50d": "#3492e0",
+        "50n": "#0d2e41",
+        "default": "#60a5fa",
+    }
 
     useEffect(() => {
         if (isLoading && $imageCode !== "default") {
@@ -16,7 +64,17 @@ const Loader = () => {
                 document.body.style.overflow = "visible"
             }, 1000)
         }
-    }, [$imageCode])
+
+        if (!isLoading && document?.documentElement?.clientWidth <= 640) {
+            // Mobile Image Colors Avg
+            document.documentElement.style.setProperty("--baseClr", M_Colors[$imageCode])
+            document.querySelector("meta[name='theme-color']")?.setAttribute("content", M_Colors[$imageCode]);
+        } else {
+            // Desktop Image Colors Avg
+            document.documentElement.style.setProperty("--baseClr", D_Colors[$imageCode])
+            document.querySelector("meta[name='theme-color']")?.setAttribute("content", D_Colors[$imageCode]);
+        }
+    }, [$imageCode, isLoading])
 
     return (
         <div
