@@ -67,12 +67,16 @@ const Loader = () => {
 
         if (!isLoading && document?.documentElement?.clientWidth <= 640) {
             // Mobile Image Colors Avg
-            document.documentElement.style.setProperty("--baseClr", M_Colors[$imageCode])
-            document.querySelector("meta[name='theme-color']")?.setAttribute("content", M_Colors[$imageCode]);
+            setTimeout(() => {
+                document.documentElement.style.setProperty("--baseClr", M_Colors[$imageCode])
+                document.querySelector("meta[name='theme-color']")?.setAttribute("content", M_Colors[$imageCode]);
+            }, 1000)
         } else {
             // Desktop Image Colors Avg
-            document.documentElement.style.setProperty("--baseClr", D_Colors[$imageCode])
-            document.querySelector("meta[name='theme-color']")?.setAttribute("content", D_Colors[$imageCode]);
+            setTimeout(() => {
+                document.documentElement.style.setProperty("--baseClr", D_Colors[$imageCode])
+                document.querySelector("meta[name='theme-color']")?.setAttribute("content", D_Colors[$imageCode]);
+            }, 1000)
         }
     }, [$imageCode, isLoading])
 
