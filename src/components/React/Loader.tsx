@@ -14,7 +14,7 @@ const Loader = () => {
             setTimeout(() => {
                 setIsLoading(false)
                 document.body.style.overflow = "visible"
-            }, 100)
+            }, 1000)
         }
     }, [$imageCode])
 
