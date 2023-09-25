@@ -1,7 +1,7 @@
 import { useStore } from '@nanostores/react'
 import { weather } from '../../store/weatherStore'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import moment from "moment-timezone"
+import { DateTime } from 'luxon';
 import { MoonIcons, SunriseSVG, SunsetSVG } from '../../assets'
 
 //Formatted Time and Date
@@ -12,7 +12,7 @@ export const TimeCard = () => {
     useEffect(() => {
         if ($weather) {
             const TimeLoop = setInterval(() => {
-                const formattedTime = moment().tz($weather?.location?.tz_id).format("LTS");
+                const formattedTime = DateTime.now().setZone($weather?.location?.tz_id).toLocaleString(DateTime.TIME_SIMPLE);
                 setTime(formattedTime);
             }, 1000);
 
@@ -25,12 +25,12 @@ export const TimeCard = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
                 <div className="flex flex-col items-end leading-none">
                     <span className='text-[2.2em] sm:text-[3em] tracking-wider relative'>{time}</span>
-                    <span className="px-1.5 tracking-widest opacity-80 capitalize">{$weather?.location?.tz_id || "undefined"}</span>
+                    <span className="px-1.5 tracking-widest opacity-95 capitalize">{$weather?.location?.tz_id || "undefined"}</span>
                 </div>
 
                 <div className="flex flex-col items-start sm:order-first">
-                    <span className='tracking-widest opacity-80 capitalize'>Today</span>
-                    <span className='text-[1.5em] sm:text-[1.8em]'>{moment().format("Do MMMM YYYY")}</span>
+                    <span className='tracking-widest opacity-95 capitalize'>Today</span>
+                    <span className='text-[1.5em] sm:text-[1.8em]'>{DateTime.now().toFormat('d LLLL yyyy')}</span>
                 </div>
             </div>
         )
@@ -69,10 +69,10 @@ export const SunDetails = () => {
     useEffect(() => {
         if (!isClient) return;
 
-        const currentDate = moment().format("YYYY-MM-DD");
-        const sunRiseTime = moment(`${currentDate} ${sunRiseStr}`, "YYYY-MM-DD hh:mm A").toDate().getTime();
-        const sunSetTime = moment(`${currentDate} ${sunSetStr}`, "YYYY-MM-DD hh:mm A").toDate().getTime();
-        const currentTime = moment($weather?.location?.localtime).toDate().getTime()
+        const currentDate = DateTime.now().toFormat('yyyy-MM-dd');
+        const sunRiseTime = DateTime.fromFormat(`${currentDate} ${sunRiseStr}`, 'yyyy-MM-dd hh:mm a').toJSDate().getTime();
+        const sunSetTime = DateTime.fromFormat(`${currentDate} ${sunSetStr}`, 'yyyy-MM-dd hh:mm a').toJSDate().getTime();
+        const currentTime = DateTime.fromFormat(`${$weather?.location?.localtime}`, 'yyyy-MM-dd h:mm').toMillis();
 
         const totalDuration = sunSetTime - sunRiseTime
         const elapsedTime = currentTime - sunRiseTime
@@ -129,12 +129,12 @@ export const SunDetails = () => {
                     <div className="flex justify-between gap-2 leading-none w-full absolute bottom-0">
                         <div className="flex flex-col gap-2 mt-6">
                             <img src={SunriseSVG?.src} alt="SunriseSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
-                            <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunrise</span>
+                            <span className='text-[0.8em] sm:text-[1em] opacity-95'>Sunrise</span>
                             <span className='text-[1.1em] sm:text-[1.3em]'>{sunRiseStr}</span>
                         </div>
                         <div className="flex items-end flex-col gap-2 mt-6">
                             <img src={SunsetSVG?.src} alt="SunsetSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
-                            <span className='text-[0.8em] sm:text-[1em] opacity-80'>Sunset</span>
+                            <span className='text-[0.8em] sm:text-[1em] opacity-95'>Sunset</span>
                             <span className='text-[1.1em] sm:text-[1.3em]'>{sunSetStr}</span>
                         </div>
                     </div>
@@ -151,7 +151,7 @@ export const SunDetails = () => {
                     />
 
                     <div className="flex flex-col">
-                        <span className='text-[0.8em] sm:text-[1em] opacity-80'>Moon Phase</span>
+                        <span className='text-[0.8em] sm:text-[1em] opacity-95'>Moon Phase</span>
                         <span className='text-[1em] sm:text-[1.3em]'>{moonPhase}</span>
                     </div>
                 </div>
