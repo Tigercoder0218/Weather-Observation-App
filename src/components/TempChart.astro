@@ -1,0 +1,10 @@
+---
+import BlurCard from "./BlurCard.astro";
+import WeatherChart from "./React/WeatherChart";
+---
+
+<section class="w-full col-span-2">
+    <BlurCard>
+        <WeatherChart client:load />
+    </BlurCard>
+</section>

@@ -1,8 +1,9 @@
 ---
-import CoverImage from "../components/React/CoverImage";
 import MiscDetails from "../components/MiscDetails.astro";
 import WeatherCard from "../components/WeatherCard.astro";
 import Layout from "../layouts/Layout.astro";
+import TempChart from "../components/TempChart.astro";
+import CoverImage from "../components/React/CoverImage";
 ---
 
 <Layout title="Vortexa | Weather Insights">
@@ -12,6 +13,8 @@ import Layout from "../layouts/Layout.astro";
 		<WeatherCard />
 
 		<MiscDetails />
+
+		<TempChart />
 	</main>
 
 	<CoverImage background client:load />
