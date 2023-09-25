@@ -6,8 +6,11 @@ import { ArrowSVG, CompassSVG, WindSVG } from '../../assets'
 const WindCard = () => {
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
+    const isClient = typeof window !== 'undefined';
 
     const windSpeed = useMemo(() => {
+        if (!isClient) return;
+
         const minWind = $imperialUnit ? $weather?.current?.wind_mph : $weather?.current?.wind_kph
         // const maxWind = $imperialUnit ? $weather?.current?.gust_mph : $weather?.current?.gust_kph
 

@@ -8,8 +8,9 @@ type Props = {
 
 const CoverImage = ({ background }: Props) => {
     const $imageCode = useStore(imageCode)
+    const isClient = typeof window !== 'undefined';
 
-    if ($imageCode !== "default")
+    if (isClient && $imageCode !== "default")
         return (
             <div className={background ?
                 "absolute top-0 w-screen h-screen z-[-9] overflow-hidden"
