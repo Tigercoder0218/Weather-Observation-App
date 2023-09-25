@@ -59,19 +59,19 @@ export const TempDetails = () => {
         return (
             <div className="flex gap-8 flex-col sm:flex-row">
                 <div className="flex_center flex-col p-1 rounded w-fit h-fit">
-                    <span className='opacity-80'>Feels Like</span>
+                    <span className='opacity-95'>Feels Like</span>
                     <span className='text-[1.5em]'>
                         {feelsLike + ($imperialUnit ? "°F" : "°C")}
                     </span>
                 </div>
                 <div className="flex_center flex-col p-1 rounded w-fit h-fit">
-                    <span className='opacity-80'>Min Temp</span>
+                    <span className='opacity-95'>Min Temp</span>
                     <span className='text-[1.5em]'>
                         {minTemp + ($imperialUnit ? "°F" : "°C")}
                     </span>
                 </div>
                 <div className="flex_center flex-col p-1 rounded w-fit h-fit">
-                    <span className='opacity-80'>Max Temp</span>
+                    <span className='opacity-95'>Max Temp</span>
                     <span className='text-[1.5em]'>
                         {maxTemp + ($imperialUnit ? "°F" : "°C")}
                     </span>

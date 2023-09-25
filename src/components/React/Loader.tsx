@@ -61,7 +61,7 @@ const Loader = () => {
         if (isLoading && $imageCode !== "default") {
             setTimeout(() => {
                 setIsLoading(false)
-                document.body.style.overflow = "visible"
+                document.body.style.overflowY = "visible"
             }, 1000)
         }
 
@@ -83,7 +83,7 @@ const Loader = () => {
     return (
         <div
             style={isLoading ? { display: "flex" } : { display: "none" }}
-            className='absolute inset-0 w-screen h-screen bg-gradient-to-br from-blue-400 to-indigo-400 flex_center gap-[5em] z-10 flex-col'>
+            className='fixed inset-0 w-screen h-screen bg-gradient-to-br from-blue-400 to-indigo-400 flex_center gap-[5em] z-10 flex-col'>
             <div className="absolute top-0 w-screen h-screen overflow-hidden">
                 <img
                     src={MobileImg["default"]?.src}

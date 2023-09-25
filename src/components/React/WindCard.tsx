@@ -57,13 +57,13 @@ const WindCard = () => {
                         <img src={WindSVG?.src} alt="WindSVG" width={30} height={30} />
                         <div className='sm:min-w-[110px]'>
                             <span className='sm:text-[1.5em]'>{windSpeed?.toFixed()}</span>
-                            <span className='text-[0.8em] sm:text-[1em] opacity-80'>{$imperialUnit ? " mph" : " km/h"}</span>
+                            <span className='text-[0.8em] sm:text-[1em] opacity-95'>{$imperialUnit ? " mph" : " km/h"}</span>
                         </div>
                     </div>
                     <div className='flex flex-col'>
-                        <span className='text-[0.8em] sm:text-[1em] opacity-80'>Wind from</span>
+                        <span className='text-[0.8em] sm:text-[1em] opacity-95'>Wind from</span>
                         <span className='sm:hidden text-[1em] sm:text-[1.3em]'>
-                            {windDir[$weather?.current?.wind_dir || "N"].split("#")?.map((dir, index) => (
+                            {isClient && windDir[$weather?.current?.wind_dir || "N"].split("#")?.map((dir, index) => (
                                 <React.Fragment key={index}>
                                     {index > 0 && <br />}
                                     {dir}
@@ -71,7 +71,7 @@ const WindCard = () => {
                             ))}
                         </span>
                         <span className='hidden sm:block text-[1em] sm:text-[1.3em]'>
-                            {windDir[$weather?.current?.wind_dir || "N"].replace("#", "")}
+                            {isClient && windDir[$weather?.current?.wind_dir || "N"].replace("#", "")}
                         </span>
                     </div>
                 </div>
