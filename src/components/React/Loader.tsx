@@ -32,7 +32,7 @@ const Loader = () => {
         "13n": "#1a2236",
         "50d": "#24a7f1",
         "50n": "#113749",
-        "default": "#60a5fa",
+        "default": "#5488EE",
     }
 
     const M_Colors: ColorType = {
@@ -54,7 +54,7 @@ const Loader = () => {
         "13n": "#11335c",
         "50d": "#3492e0",
         "50n": "#0d2e41",
-        "default": "#60a5fa",
+        "default": "#5488EE",
     }
 
     useEffect(() => {
