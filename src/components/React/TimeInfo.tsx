@@ -12,7 +12,7 @@ export const TimeCard = () => {
     useEffect(() => {
         if ($weather) {
             const TimeLoop = setInterval(() => {
-                const formattedTime = DateTime.now().setZone($weather?.location?.tz_id).toLocaleString(DateTime.TIME_SIMPLE);
+                const formattedTime = DateTime.now().setZone($weather?.location?.tz_id).toFormat('hh:mm:ss a');
                 setTime(formattedTime);
             }, 1000);
 
@@ -67,21 +67,19 @@ export const SunDetails = () => {
 
     const isClient = typeof window !== 'undefined'; // Hydration Fix
     useEffect(() => {
-        if (!isClient) return;
+        if (isClient && SunDotRef?.current) {
+            const currentDate = DateTime.now().toFormat('yyyy-MM-dd');
+            const sunRiseTime = DateTime.fromFormat(`${currentDate} ${sunRiseStr}`, 'yyyy-MM-dd hh:mm a').toJSDate().getTime();
+            const sunSetTime = DateTime.fromFormat(`${currentDate} ${sunSetStr}`, 'yyyy-MM-dd hh:mm a').toJSDate().getTime();
+            const currentTime = DateTime.fromFormat(`${$weather?.location?.localtime}`, 'yyyy-MM-dd h:mm').toMillis();
 
-        const currentDate = DateTime.now().toFormat('yyyy-MM-dd');
-        const sunRiseTime = DateTime.fromFormat(`${currentDate} ${sunRiseStr}`, 'yyyy-MM-dd hh:mm a').toJSDate().getTime();
-        const sunSetTime = DateTime.fromFormat(`${currentDate} ${sunSetStr}`, 'yyyy-MM-dd hh:mm a').toJSDate().getTime();
-        const currentTime = DateTime.fromFormat(`${$weather?.location?.localtime}`, 'yyyy-MM-dd h:mm').toMillis();
+            const totalDuration = sunSetTime - sunRiseTime
+            const elapsedTime = currentTime - sunRiseTime
+            const progress = Math.min(Math.max(elapsedTime / totalDuration, 0), 1);
 
-        const totalDuration = sunSetTime - sunRiseTime
-        const elapsedTime = currentTime - sunRiseTime
-        const progress = Math.min(Math.max(elapsedTime / totalDuration, 0), 1);
+            const x = interpolate(progress, xCoordinates);
+            const y = interpolate(progress, yCoordinates);
 
-        const x = interpolate(progress, xCoordinates);
-        const y = interpolate(progress, yCoordinates);
-
-        if (SunDotRef?.current) {
             const dotOpacity = DotOpacityMap[Math.floor(progress * 10)]
             SunDotRef?.current?.setAttribute("opacity", dotOpacity.toString());
             setCoords({ x, y })
