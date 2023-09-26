@@ -11,13 +11,14 @@ const WeatherIcon = ({ size = "125", hideText = false }: Props) => {
     const $imageCode = useStore(imageCode)
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
+    const isClient = typeof window !== 'undefined';
 
-    if ($weather)
+    if (isClient && $weather)
         return (
             <div className="self-start">
                 <div className="flex_center flex-col leading-tight">
                     <img
-                        src={WeatherIcons[$imageCode].src}
+                        src={WeatherIcons[$imageCode]?.src}
                         width={size}
                         height={size}
                         alt="Weather_Icon" />

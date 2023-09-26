@@ -8,9 +8,10 @@ import { MoonIcons, SunriseSVG, SunsetSVG } from '../../assets'
 export const TimeCard = () => {
     const [time, setTime] = useState<string>("")
     const $weather = useStore(weather)
+    const isClient = typeof window !== 'undefined'; // Hydration Fix
 
     useEffect(() => {
-        if ($weather) {
+        if (isClient && $weather) {
             const TimeLoop = setInterval(() => {
                 const formattedTime = DateTime.now().setZone($weather?.location?.tz_id).toFormat('hh:mm:ss a');
                 setTime(formattedTime);
@@ -20,7 +21,7 @@ export const TimeCard = () => {
         }
     }, [$weather]);
 
-    if ($weather)
+    if (isClient && $weather)
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
                 <div className="flex flex-col items-end leading-none">
@@ -99,7 +100,7 @@ export const SunDetails = () => {
         }
     }
 
-    if ($weather)
+    if (isClient && $weather)
         return (
             <div className="grid grid-cols-1 items-center gap-2 w-full h-full ">
                 <div className="flex items-center flex-col h-[165px] relative">
