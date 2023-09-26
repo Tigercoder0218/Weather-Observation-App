@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createRef } from 'react'
+import { useState, useEffect, useRef, createRef, useMemo } from 'react'
 import * as d3 from "d3"
 import { useStore } from '@nanostores/react';
 import { weather } from '../../store/weatherStore';
@@ -7,14 +7,33 @@ import useHorizontalScroll from '../../utils/useHorizontalScroll';
 const WeatherChart = () => {
     const $weather = useStore(weather)
     const [data, setData] = useState<number[]>([])
+    const [todayLen, setTodayLen] = useState<number>(0)
     const SvgRef = useRef<SVGSVGElement | null>(null)
     const ChartContainerRef = useHorizontalScroll(createRef());
 
-    useEffect(() => {
-        const tempData = $weather?.forecast?.forecastday[0]?.hour.map(curr => (curr?.temp_c))
-        // console.log(tempData)
-        if (tempData !== undefined) {
-            setData(tempData);
+    useMemo(() => {
+        const hours = new Date($weather?.location?.localtime as string).getHours()
+
+        const todayHrs = $weather?.forecast?.forecastday[0]?.hour.map(curr => {
+            const currHour = new Date(curr?.time).getHours()
+            if (currHour >= hours) {
+                return curr?.temp_c
+            } else return null
+        }).filter(temp => temp !== null)
+        setTodayLen(todayHrs?.length || 0) //Today length counter
+
+        const tommorowHrs = $weather?.forecast?.forecastday[1]?.hour.map((curr, index) => {
+            if (todayHrs && index < 24 - todayHrs?.length) {
+                return curr?.temp_c
+            } else return null
+        }).filter(temp => temp !== null)
+
+        if (todayHrs && tommorowHrs) {
+            // Merging data from today's remaining hours + tommorows hours
+            // adding upto total of 24Hrs of temperature data
+            const mergedData = [...todayHrs, ...tommorowHrs].filter((temp) => temp !== null) as number[];
+            // console.log(mergedData)
+            setData(mergedData);
         }
     }, [$weather])
 
@@ -61,7 +80,6 @@ const WeatherChart = () => {
             .attr('stroke', '#fff')
             .attr('stroke-width', 3)
             .transition()
-            .delay(2000)
             .duration(2000)
             .ease(d3.easeCubicInOut)
             .attrTween('stroke-dasharray', function () {
@@ -71,31 +89,73 @@ const WeatherChart = () => {
                 };
             });
 
+        // Adding X-axis label on bottom
+        const hours = new Date($weather?.location?.localtime as string).getHours()
+        const tickLabel = d3.axisBottom(xScale).ticks(24).tickFormat((d, i) => {
+            if (d == 0) {
+                return "Now"
+            } else if (i + hours > 24) {
+                // if i+ currHour is > than 24, rest xaxis label to start from 1
+                return i - todayLen + ":00"
+            } else {
+                return i + hours + ":00"
+            }
+        })
         svg.select<SVGSVGElement>('.x-axis')
             .attr("transform", `translate(0,${height - marginBottom})`)
-            .call(d3.axisBottom(xScale).ticks(24))
+            .call(tickLabel)
             .selectAll("text")
-            .style("font-size", "1em")
+            .style("font-size", "1.1em")
             .style("text-anchor", "middle")
 
+        // Temperature Labels over path
         const tempLabels = svg.selectAll<SVGTextElement, number>('.temp-label')
             .data(data);
-
         tempLabels.enter()
             .append('text')
             .attr('class', 'temp-label')
             .merge(tempLabels)
             .attr('x', (d, i) => xScale(i))
             .attr('y', (d, i) => yScale(d) - 20)
-            .text(d => `${d}°C`)
+            .text(d => `${d}°`)
             .style('text-anchor', 'middle')
-            .style('font-size', '0.8em')
-            .style('fill', 'white');
+            .style('font-size', '0.85em')
+            .style('fill', 'white')
+            .style('opacity', 0)
+            .transition()
+            .delay(600)
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .style('opacity', 1)
+
+
+        // Cicle dots showing x-y intersection
+        svg.selectAll(".point-dot").remove();
+        const pointDots = svg.selectAll<SVGCircleElement, number>('.point-dot')
+            .data(data);
+        pointDots.enter()
+            .append('circle')
+            .attr('class', 'point-dot')
+            .merge(pointDots)
+            .attr('cx', (d, i) => xScale(i))
+            .attr('cy', (d, i) => yScale(d))
+            .attr('r', 0)
+            .attr('fill', (d, i) => {
+                return i === 0 ? '#FF6B00' : 'white';
+            })
+            .attr('stroke', 'white')
+            .transition()
+            .delay(600)
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .attr('r', (d, i) => {
+                return i === hours ? 7 : 5;
+            })
     }, [data, SvgRef?.current])
 
     return (
         <div className='relative'>
-            <p className="text-center text-[1em] opacity-85">24 Hours Forecast</p>
+            <p className="text-[1.2em] tracking-wider opacity-85">24 Hours Forecast</p>
 
             <div className="overflow-x-auto cursor-grab active:cursor-grabbing" ref={ChartContainerRef}>
                 <svg ref={SvgRef} className='w-[400%] lg:w-[150%] h-fit select-none'>
