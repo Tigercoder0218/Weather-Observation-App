@@ -25,14 +25,14 @@ export const TimeCard = () => {
     if (isClient && $weather)
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 items-center text-center">
-                <div className="flex flex-col items-end leading-none">
-                    <span className='text-[2.2em] sm:text-[3em] tracking-wider relative'>{time}</span>
+                <div className="flex flex-col items-end leading-none ">
+                    <span className='text-[2em] sm:text-[2.5em] tracking-wider relative'>{time}</span>
                     <span className="px-1.5 tracking-widest opacity-95 capitalize">{$weather?.location?.tz_id || "undefined"}</span>
                 </div>
 
-                <div className="flex flex-col items-start sm:order-first">
+                <div className="flex flex-col items-start mt-[-1.25em] sm:mt-0 sm:order-first">
                     <span className='tracking-widest opacity-95 capitalize'>Today</span>
-                    <span className='text-[1.5em] sm:text-[1.8em]'>{DateTime.now().toFormat('d LLLL yyyy')}</span>
+                    <span className='text-[1.25em] sm:text-[1.4em]'>{DateTime.now().toFormat('d LLLL yyyy')}</span>
                 </div>
             </div>
         )
