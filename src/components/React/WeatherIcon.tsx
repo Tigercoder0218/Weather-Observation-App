@@ -7,7 +7,7 @@ type Props = {
     hideText?: boolean
 }
 
-const WeatherIcon = ({ size = "125", hideText = false }: Props) => {
+const WeatherIcon = ({ size = "125" }: Props) => {
     const $imageCode = useStore(imageCode)
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
