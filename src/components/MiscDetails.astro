@@ -1,6 +1,6 @@
 ---
 import BlurCard from "./BlurCard.astro";
-import { SunDetails, TimeCard } from "./React/TimeInfo";
+import { SunChart, TimeCard } from "./React/TimeInfo";
 import WindCard from "./React/WindCard";
 ---
 
@@ -14,7 +14,7 @@ import WindCard from "./React/WindCard";
             <WindCard client:load />
         </BlurCard>
         <BlurCard className="pt-0">
-            <SunDetails client:load />
+            <SunChart client:load />
         </BlurCard>
     </div>
 </section>
