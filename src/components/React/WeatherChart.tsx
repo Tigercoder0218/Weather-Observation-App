@@ -38,6 +38,27 @@ const WeatherChart = () => {
     }, [$weather])
 
     useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    renderD3Chart();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        if (SvgRef.current) {
+            observer.observe(SvgRef.current);
+        }
+    }, [data, SvgRef?.current])
+
+    const renderD3Chart = () => {
         if (!data.length || !SvgRef.current) return;
 
         const marginTop = 20;
@@ -151,7 +172,7 @@ const WeatherChart = () => {
             .attr('r', (d, i) => {
                 return i === hours ? 7 : 5;
             })
-    }, [data, SvgRef?.current])
+    }
 
     return (
         <div className='relative'>
