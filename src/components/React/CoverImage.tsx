@@ -6,11 +6,11 @@ type Props = {
     background?: boolean
 }
 
-const CoverImage = ({ background }: Props) => {
+const CoverImage = ({ background = false }: Props) => {
     const $imageCode = useStore(imageCode)
     const isClient = typeof window !== 'undefined';
 
-    if (isClient && $imageCode !== "default")
+    if (isClient && $imageCode !== null)
         return (
             <div className={background ?
                 "absolute top-0 w-screen h-screen z-[-9] overflow-hidden"

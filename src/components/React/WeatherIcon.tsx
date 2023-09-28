@@ -3,8 +3,7 @@ import { WeatherIcons } from "../../assets";
 import { imageCode, imperialUnit, weather } from "../../store/weatherStore";
 
 type Props = {
-    size?: string;
-    hideText?: boolean
+    size?: string
 }
 
 const WeatherIcon = ({ size = "125" }: Props) => {
@@ -18,7 +17,7 @@ const WeatherIcon = ({ size = "125" }: Props) => {
             <div className="self-start">
                 <div className="flex_center flex-col leading-tight">
                     <img
-                        src={WeatherIcons[$imageCode]?.src}
+                        src={WeatherIcons[$imageCode || "default"]?.src}
                         width={size}
                         height={size}
                         alt="Weather_Icon" />

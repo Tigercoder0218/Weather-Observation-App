@@ -101,18 +101,26 @@ const { title } = Astro.props;
 	}
 
 	.animate-wind {
-		animation: wind 2s ease infinite both;
+		animation: wind 4s ease infinite both;
 	}
 
 	@keyframes wind {
 		0%,
 		100% {
+			transform: rotate(0deg);
+			animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		}
+		25% {
 			transform: rotate(-3deg);
 			animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
 		}
 		50% {
-			transform: rotate(3deg);
+			transform: rotate(0deg);
 			animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		}
+		75% {
+			transform: rotate(3deg);
+			animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
 		}
 	}
 

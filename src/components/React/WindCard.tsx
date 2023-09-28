@@ -37,7 +37,7 @@ const WindCard = () => {
         WSW: "West/#South-West",
     } // "#" is just used as a split() identifier
 
-    if ($weather)
+    if (isClient && $weather)
         return (
             <div className="flex_center flex-col justify-between gap-4 w-[100px] h-full sm:w-fit">
                 <div className="relative flex_center">
@@ -63,7 +63,8 @@ const WindCard = () => {
                     <div className='flex flex-col'>
                         <span className='text-[0.8em] sm:text-[1em] opacity-95'>Wind from</span>
                         <span className='sm:hidden text-[1em] sm:text-[1.3em]'>
-                            {isClient && windDir[$weather?.current?.wind_dir || "N"].split("#")?.map((dir, index) => (
+                            {windDir[$weather?.current?.wind_dir || "N"].split("#")?.map((dir, index) => (
+                                // If Wind direction has 2 words, break it into next line for mobile view
                                 <React.Fragment key={index}>
                                     {index > 0 && <br />}
                                     {dir}
@@ -71,7 +72,7 @@ const WindCard = () => {
                             ))}
                         </span>
                         <span className='hidden sm:block text-[1em] sm:text-[1.3em]'>
-                            {isClient && windDir[$weather?.current?.wind_dir || "N"].replace("#", "")}
+                            {windDir[$weather?.current?.wind_dir || "N"].replace("#", "")}
                         </span>
                     </div>
                 </div>

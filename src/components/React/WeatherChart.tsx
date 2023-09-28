@@ -165,12 +165,13 @@ const WeatherChart = () => {
                 return i === 0 ? '#FF6B00' : 'white';
             })
             .attr('stroke', 'white')
+            .attr('stroke-width', 2)
             .transition()
             .delay(600)
             .duration(1000)
             .ease(d3.easeCubicInOut)
             .attr('r', (d, i) => {
-                return i === hours ? 7 : 5;
+                return i === hours ? 6 : 5;
             })
     }
 

@@ -58,7 +58,7 @@ const Loader = () => {
     }
 
     useEffect(() => {
-        if (isLoading && $imageCode !== "default") {
+        if (isLoading && $imageCode !== null) {
             setTimeout(() => {
                 setIsLoading(false)
                 document.body.style.overflowY = "visible"
@@ -68,14 +68,14 @@ const Loader = () => {
         if (!isLoading && document?.documentElement?.clientWidth <= 640) {
             // Mobile Image Colors Avg
             setTimeout(() => {
-                document.documentElement.style.setProperty("--baseClr", M_Colors[$imageCode])
-                document.querySelector("meta[name='theme-color']")?.setAttribute("content", M_Colors[$imageCode]);
+                document.documentElement.style.setProperty("--baseClr", M_Colors[$imageCode || "default"])
+                document.querySelector("meta[name='theme-color']")?.setAttribute("content", M_Colors[$imageCode || "default"]);
             }, 1000)
         } else {
             // Desktop Image Colors Avg
             setTimeout(() => {
-                document.documentElement.style.setProperty("--baseClr", D_Colors[$imageCode])
-                document.querySelector("meta[name='theme-color']")?.setAttribute("content", D_Colors[$imageCode]);
+                document.documentElement.style.setProperty("--baseClr", D_Colors[$imageCode || "default"])
+                document.querySelector("meta[name='theme-color']")?.setAttribute("content", D_Colors[$imageCode || "default"]);
             }, 1000)
         }
     }, [$imageCode, isLoading])

@@ -65,6 +65,6 @@ export const weatherIconCode = async () => {
         // console.log(IconCode + isDay)
         imageCode.set(IconCode + isDay)
     } else {
-        imageCode.set('default')
+        imageCode.set(null)
     }
 }
