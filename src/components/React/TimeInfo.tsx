@@ -105,7 +105,7 @@ export const SunChart = () => {
             .attr('fill', '#FF6B00')
             .attr('stroke', '#FFD600')
             .attr('stroke-width', 4)
-            .attr('fill-opacity', dotOpacity);
+            .attr('opacity', dotOpacity)
 
         circle
             .transition()

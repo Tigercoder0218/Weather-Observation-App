@@ -171,7 +171,7 @@ const WeatherChart = () => {
             .duration(1000)
             .ease(d3.easeCubicInOut)
             .attr('r', (d, i) => {
-                return i === hours ? 6 : 5;
+                return i === 0 ? 7 : 5;
             })
     }
 
