@@ -66,7 +66,7 @@ export const SunChart = () => {
         const options = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.2,
+            threshold: 0.5,
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
@@ -81,7 +81,7 @@ export const SunChart = () => {
         if (svgRef.current) {
             observer.observe(svgRef.current);
         }
-    }, [$weather]);
+    }, [$weather, svgRef.current]);
 
     const renderD3Chart = () => {
         const currentDate = DateTime.fromFormat(`${$weather?.location?.localtime}`, 'yyyy-MM-dd h:mm')?.toFormat('yyyy-MM-dd');
