@@ -89,7 +89,7 @@ const AirQuality = () => {
                 Air Quality Index
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:gap-12">
+            <div className="flex flex-col sm:flex-row md:gap-4 sm:gap-12">
                 <div className="flex justify-evenly items-center gap-2">
                     <span style={{ color: getColorCode(aqi) }} className='text-[2.5em]'>{aqi.toFixed()}</span>
 
@@ -99,43 +99,43 @@ const AirQuality = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-between gap-2 sm:w-full">
+                <div className="flex justify-between gap-2 sm:w-full pt-1 sm:pt-0 border-t border-white/20 sm:border-none">
                     <div className="flex_center flex-col">
                         <span style={{ color: getColorCode($weather?.current?.air_quality?.pm2_5 || 0) }} className='text-[1.1em] sm:text-[1.5em]'>
                             {$weather?.current?.air_quality?.pm2_5}
                         </span>
-                        <span className='text-[0.7em] sm:text-[1em]'>PM2.5</span>
+                        <span className='text-[0.7em] sm:text-[0.9em]'>PM2.5</span>
                     </div>
 
                     <div className="flex_center flex-col">
                         <span style={{ color: getColorCode($weather?.current?.air_quality?.pm10 || 0) }} className='text-[1.1em] sm:text-[1.5em]'>
                             {$weather?.current?.air_quality?.pm10}
                         </span>
-                        <span className='text-[0.7em] sm:text-[1em]'>PM10</span>
+                        <span className='text-[0.7em] sm:text-[0.9em]'>PM10</span>
                     </div>
                     <div className="flex_center flex-col">
                         <span style={{ color: getColorCode($weather?.current?.air_quality?.so2 || 0) }} className='text-[1.1em] sm:text-[1.5em]'>
                             {$weather?.current?.air_quality?.so2}
                         </span>
-                        <span className='text-[0.7em] sm:text-[1em]'>SO2</span>
+                        <span className='text-[0.7em] sm:text-[0.9em]'>SO2</span>
                     </div>
                     <div className="flex_center flex-col">
                         <span style={{ color: getColorCode($weather?.current?.air_quality?.no2 || 0) }} className='text-[1.1em] sm:text-[1.5em]'>
                             {$weather?.current?.air_quality?.no2}
                         </span>
-                        <span className='text-[0.7em] sm:text-[1em]'>NO2</span>
+                        <span className='text-[0.7em] sm:text-[0.9em]'>NO2</span>
                     </div>
                     <div className="flex_center flex-col">
                         <span style={{ color: getColorCode($weather?.current?.air_quality?.o3 || 0) }} className='text-[1.1em] sm:text-[1.5em]'>
                             {$weather?.current?.air_quality?.o3}
                         </span>
-                        <span className='text-[0.7em] sm:text-[1em]'>O3</span>
+                        <span className='text-[0.7em] sm:text-[0.9em]'>O3</span>
                     </div>
                     <div className="flex_center flex-col">
                         <span style={{ color: getColorCode(($weather?.current?.air_quality?.co || 0) / 10) }} className='text-[1.1em] sm:text-[1.5em]'>
                             {($weather?.current?.air_quality?.co ? ($weather?.current?.air_quality?.co / 10).toFixed() : '0')}
                         </span>
-                        <span className='text-[0.7em] sm:text-[1em]'>CO</span>
+                        <span className='text-[0.7em] sm:text-[0.9em]'>CO</span>
                     </div>
                 </div>
             </div>

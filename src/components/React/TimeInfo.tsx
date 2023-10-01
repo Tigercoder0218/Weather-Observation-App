@@ -133,7 +133,7 @@ export const SunChart = () => {
     if (isClient && $weather)
         return (
             <div className="grid grid-cols-1 items-center gap-2 w-full h-full sm:min-w-[220px]">
-                <div className="flex items-center flex-col h-[165px] relative">
+                <div className="flex items-center flex-col h-full relative">
                     <svg
                         ref={svgRef}
                         viewBox="-50 -50 619 369"
@@ -151,13 +151,13 @@ export const SunChart = () => {
                         </defs>
                     </svg>
 
-                    <div className="flex justify-between gap-2 leading-none w-full absolute bottom-0">
-                        <div className="flex flex-col gap-2 mt-6">
+                    <div className="flex justify-between self-end gap-2 leading-none w-full">
+                        <div className="flex flex-col gap-2">
                             <img src={SunriseSVG?.src} alt="SunriseSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
                             <span className='text-[0.8em] sm:text-[1em] opacity-95'>Sunrise</span>
                             <span className='text-[1.1em] sm:text-[1.3em]'>{sunRiseStr}</span>
                         </div>
-                        <div className="flex items-end flex-col gap-2 mt-6">
+                        <div className="flex items-end flex-col gap-2">
                             <img src={SunsetSVG?.src} alt="SunsetSVG" width={30} height={30} className='w-[24px] sm:w-[30px]' />
                             <span className='text-[0.8em] sm:text-[1em] opacity-95'>Sunset</span>
                             <span className='text-[1.1em] sm:text-[1.3em]'>{sunSetStr}</span>

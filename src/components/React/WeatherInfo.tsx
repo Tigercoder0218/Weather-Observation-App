@@ -99,28 +99,28 @@ export const MiscInfo = () => {
     return (
         <div className="flex flex-col gap-4 justify-evenly w-full h-full">
             <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
+                <span>Clouds</span>
+                <span>{hourlyData?.cloud}%</span>
+            </div>
+            <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
                 <span>Humidity</span>
                 <span>{hourlyData?.humidity}%</span>
-            </div>
-            <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
-                <span>UV Index</span>
-                <span>{hourlyData?.uv}</span>
-            </div>
-            <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
-                <span>Pressure</span>
-                <span>{hourlyData?.pressure_mb} mb</span>
             </div>
             <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
                 <span>Chance of Rain</span>
                 <span>{hourlyData?.chance_of_rain}%</span>
             </div>
             <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
+                <span>UV Index</span>
+                <span>{hourlyData?.uv}</span>
+            </div>
+            <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
                 <span>Visibility</span>
                 <span>{hourlyData?.vis_km} km</span>
             </div>
             <div className="flex justify-between w-full">
-                <span>Clouds</span>
-                <span>{hourlyData?.cloud}%</span>
+                <span>Pressure</span>
+                <span>{hourlyData?.pressure_mb} mb</span>
             </div>
         </div>
     )
