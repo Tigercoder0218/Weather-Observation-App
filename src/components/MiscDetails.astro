@@ -3,6 +3,7 @@ import BlurCard from "./BlurCard.astro";
 import { SunChart, TimeCard } from "./React/TimeInfo";
 import { MiscInfo } from "./React/WeatherInfo";
 import WindCard from "./React/WindCard";
+import AirQuality from "./React/AirQuality";
 ---
 
 <section class="flex flex-col gap-2 col-span-2 sm:col-auto">
@@ -23,4 +24,7 @@ import WindCard from "./React/WindCard";
             <MiscInfo client:load />
         </BlurCard>
     </div>
+    <BlurCard className="w-full h-full">
+        <AirQuality client:load />
+    </BlurCard>
 </section>
