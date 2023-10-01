@@ -39,9 +39,9 @@ const WindCard = () => {
 
     if (isClient && $weather)
         return (
-            <div className="flex_center flex-col justify-between gap-4 h-full sm:min-w-[150px]">
-                <div className="relative flex_center">
-                    <img src={CompassSVG?.src} alt="Arrow_Icon" width={100} height={100} draggable={false} />
+            <div className="flex_center flex-col justify-between gap-4 h-full max-w-[120px] sm:min-w-[150px]">
+                <div className="relative flex_center sm:p-1">
+                    <img src={CompassSVG?.src} alt="Compass_Icon" width="100%" height="100%" draggable={false} />
                     <img
                         src={ArrowSVG?.src}
                         alt="Arrow_Icon"
