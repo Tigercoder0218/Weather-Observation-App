@@ -132,7 +132,7 @@ export const SunChart = () => {
 
     if (isClient && $weather)
         return (
-            <div className="grid grid-cols-1 items-center gap-2 w-full h-full">
+            <div className="grid grid-cols-1 items-center gap-2 w-full h-full sm:min-w-[220px]">
                 <div className="flex items-center flex-col h-[165px] relative">
                     <svg
                         ref={svgRef}
@@ -165,9 +165,7 @@ export const SunChart = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-[1px] bg-white/20"></div>
-
-                <div className="flex justify-between items-center gap-2 w-full self-end">
+                <div className="flex justify-between items-center gap-2 w-full self-end pt-2 border-t border-white/20">
                     <img
                         src={MoonIcons[moonPhase?.replaceAll(" ", "_")]?.src}
                         alt="MoonPhase"

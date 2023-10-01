@@ -39,7 +39,7 @@ const WindCard = () => {
 
     if (isClient && $weather)
         return (
-            <div className="flex_center flex-col justify-between gap-4 w-[100px] h-full sm:w-fit">
+            <div className="flex_center flex-col justify-between gap-4 min-w-[100px] h-full sm:w-fit">
                 <div className="relative flex_center">
                     <img src={CompassSVG?.src} alt="Arrow_Icon" width={100} height={100} draggable={false} />
                     <img
@@ -53,9 +53,9 @@ const WindCard = () => {
                 </div>
 
                 <div className="flex flex-col gap-4 w-full">
-                    <div className="flex gap-2">
+                    <div className="flex_center gap-2">
                         <img src={WindSVG?.src} alt="WindSVG" width={30} height={30} />
-                        <div className='sm:min-w-[110px]'>
+                        <div className='flex'>
                             <span className='sm:text-[1.5em]'>{windSpeed?.toFixed()}</span>
                             <span className='text-[0.8em] sm:text-[1em] opacity-95'>{$imperialUnit ? " mph" : " km/h"}</span>
                         </div>
