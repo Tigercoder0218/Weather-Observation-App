@@ -17,7 +17,7 @@ export const WeatherMainInfo = () => {
 
     if ($weather) {
         return (
-            <div className="flex flex-col w-fit select-none">
+            <div className="flex flex-col w-fit select-none drop-shadow-lg">
                 <div className="flex_center items-start leading-none min-w-[200px]">
                     <span className='text-[5em] sm:text-[6em]'>
                         {temp?.toFixed().toString() || "--"}
@@ -58,7 +58,7 @@ export const TempDetails = () => {
 
     if ($weather)
         return (
-            <div className="flex gap-8 flex-col sm:flex-row">
+            <div className="flex gap-8 flex-col sm:flex-row drop-shadow-lg">
                 <div className="flex_center flex-col p-1 rounded w-fit h-fit">
                     <span className='opacity-95'>Feels Like</span>
                     <span className='text-[1.5em]'>
