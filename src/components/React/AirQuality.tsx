@@ -44,13 +44,13 @@ const AirQuality = () => {
         } else if (value <= 100) {
             return "Moderate air quality. Enjoy the outdoors!";
         } else if (value <= 150) {
-            return "Caution to Sensitive Groups: Limit outdoor time.";
+            return "Caution: Consider limiting outdoor time.";
         } else if (value <= 200) {
-            return "Unhealthy air quality. Avoid strenuous activities.";
+            return "Unhealthy air quality. Avoid strenuous work.";
         } else if (value <= 300) {
-            return "Very unhealthy air. Stay indoors, keep windows closed.";
+            return "Very unhealthy air. Stay indoors, close windows";
         } else {
-            return "Hazardous air quality. Stay indoors, use air purifiers.";
+            return "Hazardous air. Stay indoors, use purifiers.";
         }
     }
 
@@ -90,10 +90,10 @@ const AirQuality = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row md:gap-4 sm:gap-12">
-                <div className="flex justify-evenly items-center gap-2">
+                <div className="flex items-center gap-2">
                     <span style={{ color: getColorCode(aqi) }} className='text-[2.5em]'>{aqi.toFixed()}</span>
 
-                    <div className="flex flex-col whitespace-nowrap">
+                    <div className="flex flex-col sm:whitespace-nowrap">
                         <span style={{ color: getColorCode(aqi) }} className='text-[1.2em] sm:text-[1.4em]'>{getAirQuality(aqi)}</span>
                         <p className='text-[0.75em] sm:text-[0.9em]'>{getAirQualityMessage(aqi)}</p>
                     </div>
