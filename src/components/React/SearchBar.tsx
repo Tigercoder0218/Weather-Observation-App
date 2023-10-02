@@ -93,7 +93,7 @@ const SearchBar = () => {
                 />
             </form>
 
-            <button type='button' title='Current Location' className="p-1 bg-black/20 rounded" onClick={HandleGeoLocation}>
+            <button type='button' title='Current Location' className="p-1 bg-black/20 border border-white/10 rounded" onClick={HandleGeoLocation}>
                 <MapPin width="28px" height="28px" />
             </button>
         </div>
