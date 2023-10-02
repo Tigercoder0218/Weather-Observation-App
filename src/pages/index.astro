@@ -4,6 +4,7 @@ import WeatherCard from "../components/WeatherCard.astro";
 import Layout from "../layouts/Layout.astro";
 import TempChart from "../components/TempChart.astro";
 import CoverImage from "../components/React/CoverImage";
+import ForecastCard from "../components/ForecastCard.astro";
 ---
 
 <Layout title="Vortexa | Weather Insights">
@@ -11,10 +12,9 @@ import CoverImage from "../components/React/CoverImage";
 		class="grid grid-cols-1 sm:grid-cols-2 gap-3 px-4 overflow-x-hidden pb-8"
 	>
 		<WeatherCard />
-
 		<MiscDetails />
-
 		<TempChart />
+		<ForecastCard />
 	</main>
 
 	<CoverImage background client:load />

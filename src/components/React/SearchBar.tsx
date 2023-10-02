@@ -4,7 +4,7 @@ import { FetchWeatherQuery, FetchWeatherPosition } from '../../hooks/useFetchWea
 import MapPin from '../SVG/MapPin';
 import { weather } from '../../store/weatherStore';
 import { toast } from 'react-hot-toast';
-import { weatherIconCode } from '../../hooks/useIconCode';
+import { useIconCode } from '../../hooks/useIconCode';
 
 const SearchBar = () => {
     const [query, setQuery] = useState<string>("mangalore")
@@ -18,7 +18,7 @@ const SearchBar = () => {
         // console.log("DOTAAA", data);
         if (data) {
             weather.set(data)
-            weatherIconCode()
+            useIconCode()
             SearchRef.current?.blur()
         }
     };
@@ -32,7 +32,7 @@ const SearchBar = () => {
         try {
             const data = await FetchWeatherPosition(pos);
             weather.set(data)
-            weatherIconCode()
+            useIconCode()
         } catch (error) {
             console.log(error)
         }
