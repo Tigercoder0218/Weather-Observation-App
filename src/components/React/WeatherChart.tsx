@@ -113,27 +113,25 @@ const WeatherChart = () => {
         // Adding X-axis label on bottom
         const hours = new Date($weather?.location?.localtime as string).getHours() // Current Hour
         const tickLabel = d3.axisBottom(xScale).ticks(24).tickFormat((d, i) => {
+            let time = i + hours
             if (d == 0) {
-                // First index is the Current Time
                 return "Now"
-            } else if (i - todayLen == 12) {
-                // Its Noon
-                return "12 PM"
-            } else if (i + hours == 24) {
-                // Its Midnight
-                return "00 AM"
-            } else if (i - todayLen > 12) {
-                // if > 12, its tommorrowr's Afternoon, converting to 12hrs format
-                return i - todayLen - 12 + " PM"
-            } else if (i + hours > 24) {
-                // Its the new Day after 24
-                // if i + hours is > than 24, reset xaxis label to start from 1 AM
-                return i - todayLen + " AM"
+            } else if (time == 24) {
+                // if i+ hour is > than 24, rest xaxis label to start from 1
+                return "0 AM"
+            } else if (time > 24) {
+                // Its the new Day after 24, Tommorrows Time Cacl
+                // if time is > than 24, rest xaxis label to start from 1
+                let newTime = time - 24
+                return newTime == 12 ? `${newTime} PM` :
+                    newTime > 12 ?
+                        `${newTime - 12} PM` : `${newTime} AM`
             } else {
-                // Rest of todays Afternoon, converting to 12hrs format
-                return i + hours - 12 + " PM"
+                // Today's Time calc
+                return time > 12 ? `${time - 12} PM` : `${time} AM`
             }
         })
+
         svg.select<SVGSVGElement>('.x-axis')
             .attr("transform", `translate(0,${height - marginBottom})`)
             .call(tickLabel)
