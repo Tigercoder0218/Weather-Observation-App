@@ -10,15 +10,15 @@ const AirQuality = () => {
         if (value <= 50) {
             return "#00E400" //green
         } else if (value <= 100) {
-            return "#ffff00" //yellow
+            return "#FFFF00" //yellow
         } else if (value <= 150) {
-            return "#ff7e00" //orange
+            return "#FF7E00" //orange
         } else if (value <= 200) {
-            return "#ff0000" //red
+            return "#FF0000" //red
         } else if (value <= 300) {
-            return "#8f3f97" //purple
+            return "#8B008B" //purple
         } else {
-            return "#7e0023" //maroon
+            return "#800000" //maroon
         }
     }
 
