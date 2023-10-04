@@ -111,15 +111,27 @@ const WeatherChart = () => {
             });
 
         // Adding X-axis label on bottom
-        const hours = new Date($weather?.location?.localtime as string).getHours()
+        const hours = new Date($weather?.location?.localtime as string).getHours() // Current Hour
         const tickLabel = d3.axisBottom(xScale).ticks(24).tickFormat((d, i) => {
             if (d == 0) {
+                // First index is the Current Time
                 return "Now"
+            } else if (i - todayLen == 12) {
+                // Its Noon
+                return "12 PM"
+            } else if (i + hours == 24) {
+                // Its Midnight
+                return "00 AM"
+            } else if (i - todayLen > 12) {
+                // if > 12, its tommorrowr's Afternoon, converting to 12hrs format
+                return i - todayLen - 12 + " PM"
             } else if (i + hours > 24) {
-                // if i+ currHour is > than 24, rest xaxis label to start from 1
-                return i - todayLen + ":00"
+                // Its the new Day after 24
+                // if i + hours is > than 24, reset xaxis label to start from 1 AM
+                return i - todayLen + " AM"
             } else {
-                return i + hours + ":00"
+                // Rest of todays Afternoon, converting to 12hrs format
+                return i + hours - 12 + " PM"
             }
         })
         svg.select<SVGSVGElement>('.x-axis')
