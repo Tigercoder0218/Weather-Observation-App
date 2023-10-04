@@ -57,11 +57,11 @@ const ForecastWeather = () => {
                                         <span>{obj?.day?.daily_chance_of_rain}%</span>
                                     </div>
                                     <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
-                                        <span>Sun Rise</span>
+                                        <span>Sunrise</span>
                                         <span>{obj?.astro?.sunrise}</span>
                                     </div>
                                     <div className="flex justify-between w-full">
-                                        <span>Sun Set</span>
+                                        <span>Sunset</span>
                                         <span>{obj?.astro?.sunset}</span>
                                     </div>
                                 </div>
