@@ -7,7 +7,7 @@ import useHorizontalScroll from '../../utils/useHorizontalScroll';
 const WeatherChart = () => {
     const $weather = useStore(weather)
     const [data, setData] = useState<number[]>([])
-    const [todayLen, setTodayLen] = useState<number>(0)
+    const [iconData, setIconData] = useState<string[]>([])
     const SvgRef = useRef<SVGSVGElement | null>(null)
     const ChartContainerRef = useHorizontalScroll(createRef());
 
@@ -20,7 +20,6 @@ const WeatherChart = () => {
                 return curr?.temp_c
             } else return null
         }).filter(temp => temp !== null)
-        setTodayLen(todayHrs?.length || 0) //Today length counter
 
         const tommorowHrs = $weather?.forecast?.forecastday[1]?.hour.map((curr, index) => {
             if (todayHrs && index < 24 - todayHrs?.length) {
@@ -34,6 +33,25 @@ const WeatherChart = () => {
             const mergedData = [...todayHrs, ...tommorowHrs].filter((temp) => temp !== null) as number[];
             // console.log(mergedData)
             setData(mergedData);
+        }
+
+        const todayIcons = $weather?.forecast?.forecastday[0]?.hour.map(curr => {
+            const currHour = new Date(curr?.time).getHours()
+            if (currHour >= hours) {
+                return curr?.condition?.icon
+            } else return null
+        }).filter(temp => temp !== null)
+
+        const tommorowIcons = $weather?.forecast?.forecastday[1]?.hour.map((curr, index) => {
+            if (todayHrs && index < 24 - todayHrs?.length) {
+                return curr?.condition?.icon
+            } else return null
+        }).filter(temp => temp !== null)
+
+        if (todayIcons && tommorowIcons) {
+            const mergedIconData = [...todayIcons, ...tommorowIcons].filter((temp) => temp !== null) as string[];
+            // console.log(mergedIconData)
+            setIconData(mergedIconData);
         }
     }, [$weather])
 
@@ -59,7 +77,7 @@ const WeatherChart = () => {
     }, [data, SvgRef?.current])
 
     const renderD3Chart = () => {
-        if (!data.length || !SvgRef.current) return;
+        if (!data.length || !iconData.length || !SvgRef.current) return;
 
         const marginTop = 20;
         const marginRight = 20;
@@ -140,8 +158,7 @@ const WeatherChart = () => {
             .style("text-anchor", "middle")
 
         // Temperature Labels over path
-        const tempLabels = svg.selectAll<SVGTextElement, number>('.temp-label')
-            .data(data);
+        const tempLabels = svg.selectAll<SVGTextElement, number>('.temp-label').data(data);
         tempLabels.enter()
             .append('text')
             .attr('class', 'temp-label')
@@ -162,8 +179,7 @@ const WeatherChart = () => {
 
         // Cicle dots showing x-y intersection
         svg.selectAll(".point-dot").remove();
-        const pointDots = svg.selectAll<SVGCircleElement, number>('.point-dot')
-            .data(data);
+        const pointDots = svg.selectAll<SVGCircleElement, number>('.point-dot').data(data);
         pointDots.enter()
             .append('circle')
             .attr('class', 'point-dot')
@@ -183,6 +199,19 @@ const WeatherChart = () => {
             .attr('r', (d, i) => {
                 return i === 0 ? 7 : 5;
             })
+
+        // Weather Icon Image at every hour
+        svg.selectAll(".point-icon").remove();
+        const pointIcons = svg.selectAll<SVGImageElement, number>('.point-icon').data(iconData);
+        pointIcons.enter()
+            .append('image')
+            .attr('class', 'point-icon')
+            .merge(pointIcons)
+            .attr('x', (d, i) => xScale(i) - 14)
+            .attr('y', height - 65)
+            .attr('width', 30)
+            .attr('height', 30)
+            .attr('xlink:href', (d, i) => d)
     }
 
     return (
