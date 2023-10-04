@@ -4,6 +4,7 @@ type WeatherImages = {
 };
 
 // Misc Icons
+export { default as CLogo } from "./misc/CLogo.webp"
 export { default as VortexSVG } from "./misc/vortex.svg"
 export { default as SunriseSVG } from "./misc/sunrise.svg"
 export { default as SunsetSVG } from "./misc/sunset.svg"

@@ -6,6 +6,7 @@ import TempChart from "../components/TempChart.astro";
 import CoverImage from "../components/React/CoverImage";
 import ForecastCard from "../components/ForecastCard.astro";
 import { Image } from "astro:assets";
+import { CLogo } from "../assets";
 ---
 
 <Layout title="Vortexa | Weather Insights">
@@ -27,10 +28,11 @@ import { Image } from "astro:assets";
 				rel="noreferrer noopener"
 			>
 				<Image
-					src="https://raw.githubusercontent.com/ChiragChrg/ChiragChrg.github.io/main/CLogo.png"
+					src={CLogo}
 					alt="Portfolio_Logo"
 					width="25"
 					height="25"
+					class="rounded-full"
 				/>
 				<span>Portfolio</span>
 			</a>
