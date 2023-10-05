@@ -216,6 +216,12 @@ const WeatherChart = () => {
             .attr('width', 30)
             .attr('height', 30)
             .attr('xlink:href', (d, i) => d)
+            .style('opacity', 0)
+            .transition()
+            .delay(600)
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .style('opacity', 1)
     }
 
     return (
