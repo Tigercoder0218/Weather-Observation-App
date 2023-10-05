@@ -2,6 +2,7 @@ import { useStore } from '@nanostores/react'
 import { imperialUnit, weather } from '../../store/weatherStore'
 import { WeatherIcons } from '../../assets'
 import { getIconCode } from '../../hooks/useIconCode'
+import { DateTime } from 'luxon';
 
 const ForecastWeather = () => {
     const $forecast = useStore(weather)?.forecast?.forecastday
@@ -25,7 +26,7 @@ const ForecastWeather = () => {
                         return <div key={index} className="p-2 border border-white/40 rounded h-fit">
                             <div className="flex justify-between px-2">
                                 <span>{index == 1 ? "Tomorrow" : "Overmorrow"}</span>
-                                <span>{new Date(obj.date).toLocaleDateString()}</span>
+                                <span>{DateTime.fromFormat(`${obj.date}`, 'yyyy-MM-dd')?.toFormat('dd LLL yyyy')}</span>
                             </div>
 
                             <div className="flex_center gap-8 sm:gap-12 h-full">
