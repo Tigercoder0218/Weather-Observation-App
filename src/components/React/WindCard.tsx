@@ -45,8 +45,7 @@ const WindCard = () => {
                     <img
                         src={ArrowSVG?.src}
                         alt="Arrow_Icon"
-                        width={15}
-                        className='absolute animate-wind'
+                        className='absolute animate-wind w-[25px] sm:w-[30px]'
                         draggable={false}
                         style={{ rotate: $weather?.current?.wind_degree?.toString() + "deg" }}
                     />
