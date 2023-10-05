@@ -1,29 +1,30 @@
 import { useState, useEffect, useRef, createRef, useMemo } from 'react'
 import * as d3 from "d3"
 import { useStore } from '@nanostores/react';
-import { weather } from '../../store/weatherStore';
+import { imperialUnit, weather } from '../../store/weatherStore';
 import useHorizontalScroll from '../../utils/useHorizontalScroll';
 
 const WeatherChart = () => {
     const $weather = useStore(weather)
+    const $imperialUnit = useStore(imperialUnit)
     const [data, setData] = useState<number[]>([])
     const [iconData, setIconData] = useState<string[]>([])
     const SvgRef = useRef<SVGSVGElement | null>(null)
     const ChartContainerRef = useHorizontalScroll(createRef());
+    const hours = new Date($weather?.location?.localtime as string).getHours()
 
     useMemo(() => {
-        const hours = new Date($weather?.location?.localtime as string).getHours()
-
+        // Processing Temperature values from API
         const todayHrs = $weather?.forecast?.forecastday[0]?.hour.map(curr => {
             const currHour = new Date(curr?.time).getHours()
             if (currHour >= hours) {
-                return curr?.temp_c
+                return $imperialUnit ? curr?.temp_f : curr?.temp_c
             } else return null
         }).filter(temp => temp !== null)
 
         const tommorowHrs = $weather?.forecast?.forecastday[1]?.hour.map((curr, index) => {
             if (todayHrs && index < 24 - todayHrs?.length) {
-                return curr?.temp_c
+                return $imperialUnit ? curr?.temp_f : curr?.temp_c
             } else return null
         }).filter(temp => temp !== null)
 
@@ -34,7 +35,10 @@ const WeatherChart = () => {
             // console.log(mergedData)
             setData(mergedData);
         }
+    }, [$weather, $imperialUnit])
 
+    useMemo(() => {
+        // Processing Icons from API
         const todayIcons = $weather?.forecast?.forecastday[0]?.hour.map(curr => {
             const currHour = new Date(curr?.time).getHours()
             if (currHour >= hours) {
@@ -43,7 +47,7 @@ const WeatherChart = () => {
         }).filter(temp => temp !== null)
 
         const tommorowIcons = $weather?.forecast?.forecastday[1]?.hour.map((curr, index) => {
-            if (todayHrs && index < 24 - todayHrs?.length) {
+            if (todayIcons && index < 24 - todayIcons?.length) {
                 return curr?.condition?.icon
             } else return null
         }).filter(temp => temp !== null)
@@ -79,7 +83,7 @@ const WeatherChart = () => {
     const renderD3Chart = () => {
         if (!data.length || !iconData.length || !SvgRef.current) return;
 
-        const marginTop = 20;
+        const marginTop = $imperialUnit ? 30 : 20;
         const marginRight = 20;
         const marginBottom = 30;
         const marginLeft = 20;

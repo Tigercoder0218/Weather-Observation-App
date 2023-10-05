@@ -84,6 +84,7 @@ export const TempDetails = () => {
 // Misc Details Card
 export const MiscInfo = () => {
     const $weather = useStore(weather)
+    const $imperialUnit = useStore(imperialUnit)
     const [hourlyData, setHourlyData] = useState<HourType | null>(null)
 
     // const hourlyData = $weather?.forecast?.forecastday[0]?.hour[currHour]
@@ -116,11 +117,11 @@ export const MiscInfo = () => {
             </div>
             <div className="flex justify-between w-full pb-1 sm:pb-2 border-b border-white/20">
                 <span>Visibility</span>
-                <span>{hourlyData?.vis_km} km</span>
+                <span>{$imperialUnit ? `${hourlyData?.vis_miles} mi` : `${hourlyData?.vis_km} km`}</span>
             </div>
             <div className="flex justify-between w-full">
                 <span>Pressure</span>
-                <span>{hourlyData?.pressure_mb} mb</span>
+                <span>{$imperialUnit ? `${hourlyData?.pressure_in} in` : `${hourlyData?.pressure_mb} mb`}</span>
             </div>
         </div>
     )
