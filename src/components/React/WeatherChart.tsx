@@ -235,7 +235,7 @@ const WeatherChart = () => {
             </div>
 
             <div className="overflow-x-auto cursor-grab active:cursor-grabbing" ref={ChartContainerRef}>
-                <svg ref={SvgRef} className='w-[400%] lg:w-[150%] h-fit select-none'>
+                <svg ref={SvgRef} className='w-[400%] md:w-[250%] lg:w-[150%] h-fit select-none'>
                     <g className="x-axis" />
                 </svg>
             </div>
