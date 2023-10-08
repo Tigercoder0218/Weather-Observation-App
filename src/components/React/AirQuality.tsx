@@ -89,7 +89,7 @@ const AirQuality = () => {
                 Air Quality Index
             </div>
 
-            <div className="flex flex-col sm:flex-row md:gap-4 sm:gap-12">
+            <div className="flex flex-col lg:flex-row md:gap-4 sm:gap-12">
                 <div className="flex items-center gap-2">
                     <span style={{ color: getColorCode(aqi) }} className='text-[2.5em]'>{aqi.toFixed()}</span>
 

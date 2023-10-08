@@ -17,7 +17,7 @@ const ForecastWeather = () => {
                 <span>2 Days Forecast</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-2">
                 {$forecast?.map((obj, index) => {
                     const code = obj?.day?.condition?.code
                     const iconCode = getIconCode(code)

@@ -58,7 +58,7 @@ export const TempDetails = () => {
 
     if ($weather)
         return (
-            <div className="flex gap-8 flex-col sm:flex-row drop-shadow-lg">
+            <div className="flex gap-8 flex-col lg:flex-row drop-shadow-lg">
                 <div className="flex_center flex-col p-1 rounded w-fit h-fit">
                     <span className='opacity-95'>Feels Like</span>
                     <span className='text-[1.5em]'>
