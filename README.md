@@ -10,7 +10,7 @@ Old version Github: https://github.com/ChiragChrg/CliMate
 
 ### Live Demo
 
-Check out a live demo of ARMS at https://vortexa.netlify.app/.
+Check out a live demo of VORTEXA at https://vortexa.netlify.app/.
 
 ### Preview
 ![Portfolio Preview](public/Mockup_Preview.png)
