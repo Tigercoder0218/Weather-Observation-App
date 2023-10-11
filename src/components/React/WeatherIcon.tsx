@@ -1,12 +1,8 @@
 import { useStore } from "@nanostores/react";
-import { WeatherIcons } from "../../assets";
+import { WeatherIcons } from "../../assets/icons";
 import { imageCode, imperialUnit, weather } from "../../store/weatherStore";
 
-type Props = {
-    size?: string
-}
-
-const WeatherIcon = ({ size = "125" }: Props) => {
+const WeatherIcon = () => {
     const $imageCode = useStore(imageCode)
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
@@ -15,11 +11,11 @@ const WeatherIcon = ({ size = "125" }: Props) => {
     if (isClient && $weather)
         return (
             <div className="self-start">
-                <div className="flex_center flex-col leading-tight">
+                <div className="flex flex-col leading-tight">
                     <img
                         src={WeatherIcons[$imageCode || "default"]?.src}
-                        width={size}
-                        height={size}
+                        width={WeatherIcons[$imageCode || "default"]?.width}
+                        height={WeatherIcons[$imageCode || "default"]?.height}
                         alt="Weather_Icon" />
 
                     <span className="text-[1.6em] capitalize drop-shadow-lg">{$weather?.current?.condition?.text}</span>

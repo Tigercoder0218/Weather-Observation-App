@@ -33,49 +33,6 @@ export const MoonIcons: WeatherImages = {
     "Waxing_Gibbous": WaxGibbousSVG,
 }
 
-// Weather Logo Images
-import Day from "./icons/01d.svg"
-import Night from "./icons/01n.svg"
-import FewCloud from "./icons/02d.svg"
-import FewCloudNight from "./icons/02n.svg"
-import ScatterdCloud from "./icons/03d.svg"
-import ScatterdCloudNight from "./icons/03n.svg"
-import BrokenCloud from "./icons/04d.svg"
-import BrokenCloudNight from "./icons/04n.svg"
-import ShowerRain from "./icons/09d.svg"
-import ShowerRainNight from "./icons/09n.svg"
-import Rain from "./icons/10d.svg"
-import RainNight from "./icons/10n.svg"
-import ThunderDay from "./icons/11d.svg"
-import ThunderNight from "./icons/11n.svg"
-import SnowDay from "./icons/13d.svg"
-import SnowNight from "./icons/13n.svg"
-import MistyDay from "./icons/50d.svg"
-import MistyNight from "./icons/50n.svg"
-import Unknown from "./icons/unknown.svg"
-
-export const WeatherIcons: WeatherImages = {
-    "01d": Day,
-    "01n": Night,
-    "02d": FewCloud,
-    "02n": FewCloudNight,
-    "03d": ScatterdCloud,
-    "03n": ScatterdCloudNight,
-    "04d": BrokenCloud,
-    "04n": BrokenCloudNight,
-    "09d": ShowerRain,
-    "09n": ShowerRainNight,
-    "10d": Rain,
-    "10n": RainNight,
-    "11d": ThunderDay,
-    "11n": ThunderNight,
-    "13d": SnowDay,
-    "13n": SnowNight,
-    "50d": MistyDay,
-    "50n": MistyNight,
-    "default": Unknown,
-}
-
 // Desktop Weather Images
 import D_Day from "./desktop/01d.webp"
 import D_Night from "./desktop/01n.webp"
