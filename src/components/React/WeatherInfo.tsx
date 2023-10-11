@@ -26,7 +26,7 @@ export const WeatherMainInfo = () => {
                 </div>
                 <div className='flex_center flex-col'>
                     <span className='text-[1.8em]'>{$weather?.location?.name}</span>
-                    <p>{$weather?.location?.region + ($weather?.location?.region && " , ")} {$weather?.location?.country}</p>
+                    <p className="max-w-[200px] text-center">{$weather?.location?.region + ($weather?.location?.region && " , ")} {$weather?.location?.country}</p>
                 </div>
             </div>
         )
