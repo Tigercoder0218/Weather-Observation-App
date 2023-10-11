@@ -20,7 +20,7 @@ export const FetchWeatherQuery = async (query: string) => {
     try {
         const res = await fetch(`${BASE_URL}?${URL_Params.toString()}`)
         const data = await res.json()
-        console.log("Fetch:", data)
+        // console.log("Fetch:", data)
 
         if (!data.error) {
             return data

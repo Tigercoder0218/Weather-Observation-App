@@ -14,8 +14,7 @@ import n116 from "./116n.svg";
 import d119 from "./119d.svg";
 import n119 from "./119n.svg";
 
-import d122 from "./122d.svg";
-import n122 from "./122n.svg";
+import dn122 from "./122dn.svg";
 
 import d143 from "./143d.svg";
 import n143 from "./143n.svg";
@@ -83,8 +82,8 @@ export const WeatherIcons: WeatherImages = {
     "116n": n116,
     "119d": d119,
     "119n": n119,
-    "122d": d122,
-    "122n": n122,
+    "122d": dn122,
+    "122n": dn122,
     "143d": d143,
     "143n": n143,
     "176d": d176,

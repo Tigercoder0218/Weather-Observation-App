@@ -1,5 +1,6 @@
 import { imageCode } from "../../store/weatherStore";
-import { DesktopImg, MobileImg } from "../../assets";
+import { DesktopImg } from "../../assets/desktop";
+import { MobileImg } from "../../assets/mobile";
 import { useStore } from "@nanostores/react"
 
 type Props = {
