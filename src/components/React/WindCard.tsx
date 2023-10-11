@@ -4,7 +4,7 @@ import { imperialUnit, weather } from '../../store/weatherStore'
 import { ArrowSVG, CompassSVG, WindSVG } from '../../assets'
 
 const WindCard = () => {
-    const $weather = useStore(weather)
+    const $weather = useStore(weather) || null
     const $imperialUnit = useStore(imperialUnit)
     const isClient = typeof window !== 'undefined';
 

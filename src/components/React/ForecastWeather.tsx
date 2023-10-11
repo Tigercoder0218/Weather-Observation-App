@@ -5,9 +5,9 @@ import { getIconCode } from '../../hooks/useIconCode'
 import { DateTime } from 'luxon';
 
 const ForecastWeather = () => {
-    const $forecast = useStore(weather)?.forecast?.forecastday
-    const $imperialUnit = useStore(imperialUnit)
+    const $forecast = useStore(weather) || null
     const isClient = typeof window !== 'undefined';
+    const $imperialUnit = useStore(imperialUnit)
 
     if (isClient && $forecast !== null)
         return (
@@ -20,7 +20,7 @@ const ForecastWeather = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-2">
-                    {$forecast?.map((obj, index) => {
+                    {$forecast?.forecast?.forecastday?.map((obj, index) => {
                         const code = obj?.day?.condition?.code
                         const iconCode = getIconCode(code)
 

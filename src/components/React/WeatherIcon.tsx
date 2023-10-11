@@ -3,7 +3,7 @@ import { WeatherIcons } from "../../assets/icons";
 import { imageCode, imperialUnit, weather } from "../../store/weatherStore";
 
 const WeatherIcon = () => {
-    const $imageCode = useStore(imageCode)
+    const $imageCode = useStore(imageCode) || null
     const $weather = useStore(weather)
     const $imperialUnit = useStore(imperialUnit)
     const isClient = typeof window !== 'undefined';
