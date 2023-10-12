@@ -37,8 +37,8 @@ import M_200n from "./200n.webp"
 import M_230d from "./230d.webp"
 import M_230n from "./230n.webp"
 
-import M_277d from "./277d.webp"
-import M_277n from "./277n.webp"
+import M_227d from "./227d.webp"
+import M_227n from "./227n.webp"
 
 import M_296d from "./296d.webp"
 import M_296n from "./296n.webp"
@@ -79,10 +79,10 @@ export const MobileImg: WeatherImages = {
     "200n": M_200n,
     "230d": M_230d,
     "230n": M_230n,
-    "277d": M_277d,
-    "277n": M_277n,
-    "284d": M_230d,
-    "284n": M_230n,
+    "227d": M_227d,
+    "227n": M_227n,
+    "284d": M_176d,
+    "284n": M_176n,
     "296d": M_296d,
     "296n": M_296n,
     "305d": M_305d,

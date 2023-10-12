@@ -37,8 +37,8 @@ import D_200n from "./200n.webp"
 import D_230d from "./230d.webp"
 import D_230n from "./230n.webp"
 
-import D_277d from "./277d.webp"
-import D_277n from "./277n.webp"
+import D_227d from "./227d.webp"
+import D_227n from "./227n.webp"
 
 import D_296d from "./296d.webp"
 import D_296n from "./296n.webp"
@@ -79,10 +79,10 @@ export const DesktopImg: WeatherImages = {
     "200n": D_200n,
     "230d": D_230d,
     "230n": D_230n,
-    "277d": D_277d,
-    "277n": D_277n,
-    "284d": D_230d,
-    "284n": D_230n,
+    "227d": D_227d,
+    "227n": D_227n,
+    "284d": D_176d,
+    "284n": D_176n,
     "296d": D_296d,
     "296n": D_296n,
     "305d": D_305d,

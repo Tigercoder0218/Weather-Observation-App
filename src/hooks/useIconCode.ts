@@ -4,7 +4,7 @@ import { weather } from "../store/weatherStore";
 interface IconMappingType {
     [key: string]: string
 }
-
+1240
 const IconMapping: IconMappingType = {
     "1000": "113",
     "1003": "116",
@@ -16,6 +16,9 @@ const IconMapping: IconMappingType = {
     "1063": "176",
     "1180": "176",
     "1186": "176",
+    "1150": "176",
+    "1153": "176",
+    "1240": "176",
     "1066": "179",
     "1210": "179",
     "1216": "179",
@@ -57,10 +60,12 @@ export const useIconCode = async () => {
     const $weather = weather.get()
 
     if ($weather) {
+        // const IconCode = IconMapping[1282]
         const IconCode = IconMapping[$weather?.current?.condition?.code]
         const isDay = $weather?.current?.is_day ? "d" : "n"
         // console.log(IconCode + isDay)
-        imageCode.set(IconCode + isDay)
+        imageCode.set(IconCode + "n")
+        // imageCode.set(IconCode + isDay)
     } else {
         imageCode.set(null)
     }
