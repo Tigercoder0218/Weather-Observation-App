@@ -1,8 +1,8 @@
 import { imageCode } from "../../store/weatherStore";
 import { DesktopImg } from "../../assets/desktop";
 import { MobileImg } from "../../assets/mobile";
-import { useStore } from "@nanostores/react"
-import { useEffect, useState } from "react";
+import { useStore } from "@nanostores/preact"
+import { useEffect, useState } from "preact/hooks";
 
 type Props = {
     background?: boolean

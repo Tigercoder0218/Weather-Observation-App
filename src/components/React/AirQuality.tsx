@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useStore } from '@nanostores/react'
+import { useEffect, useState } from "preact/hooks"
+import { useStore } from '@nanostores/preact'
 import { weather } from '../../store/weatherStore'
 
 const AirQuality = () => {

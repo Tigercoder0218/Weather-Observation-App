@@ -1,6 +1,6 @@
-import { useStore } from '@nanostores/react'
+import { useStore } from '@nanostores/preact'
 import { imperialUnit, weather } from '../../store/weatherStore'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'preact/hooks'
 import type { HourType } from '../../types/types'
 
 // Main Temperature and location

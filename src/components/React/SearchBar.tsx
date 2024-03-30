@@ -1,16 +1,16 @@
-import type { FormEvent } from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'preact/hooks'
 import { FetchWeatherQuery, FetchWeatherPosition } from '../../hooks/useFetchWeather';
 import MapPin from '../SVG/MapPin';
 import { weather } from '../../store/weatherStore';
 import { toast } from 'react-hot-toast';
 import { useIconCode } from '../../hooks/useIconCode';
 
+
 const SearchBar = () => {
     const [query, setQuery] = useState<string>("mangalore")
     const SearchRef = useRef<HTMLInputElement>(null)
 
-    const HandleSearch = async (e?: FormEvent<HTMLFormElement>) => {
+    const HandleSearch = async (e?: Event) => {
         e?.preventDefault()
         if (!query) return
 

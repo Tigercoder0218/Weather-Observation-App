@@ -1,4 +1,5 @@
-import { useEffect, useState, type RefObject } from 'react';
+import { type RefObject } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 function useHorizontalScroll(ref: RefObject<HTMLDivElement>): RefObject<HTMLDivElement> {
     const [isDragging, setIsDragging] = useState<boolean>(false);

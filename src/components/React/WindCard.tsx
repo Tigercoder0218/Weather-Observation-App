@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react'
-import { useStore } from '@nanostores/react'
+import { Fragment } from 'preact'
+import { useMemo } from 'preact/hooks'
+import { useStore } from '@nanostores/preact'
 import { imperialUnit, weather } from '../../store/weatherStore'
 import { ArrowSVG, CompassSVG, WindSVG } from '../../assets'
 
@@ -64,10 +65,10 @@ const WindCard = () => {
                         <span className='sm:hidden text-[1em] sm:text-[1.3em]'>
                             {windDir[$weather?.current?.wind_dir || "N"].split("#")?.map((dir, index) => (
                                 // If Wind direction has 2 words, break it into next line for mobile view
-                                <React.Fragment key={index}>
+                                <Fragment key={index}>
                                     {index > 0 && <br />}
                                     {dir}
-                                </React.Fragment>
+                                </Fragment>
                             ))}
                         </span>
                         <span className='hidden sm:block text-[1em] sm:text-[1.3em]'>

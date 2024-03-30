@@ -1,5 +1,5 @@
 ---
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 import Header from "../components/Header.astro";
 import Loader from "../components/React/Loader";
 
@@ -55,13 +55,13 @@ const { title } = Astro.props;
 		<slot />
 
 		<!-- React-Hot-Toast Container -->
-		<Toaster
+		<!-- <Toaster
 			position="top-center"
 			containerStyle={{
 				top: 65,
 			}}
 			client:load
-		/>
+		/> -->
 	</body>
 </html>
 
@@ -151,13 +151,13 @@ const { title } = Astro.props;
 </style>
 
 <script is:inline>
-if ("serviceWorker" in navigator) {
-	window.addEventListener("load", () => {
-		navigator.serviceWorker
-			.register("/serviceWorker.js")
-			.catch((RegErr) => {
-				console.log("SW Registration failed: ", RegErr);
-			});
-	});
-}
+	if ("serviceWorker" in navigator) {
+		window.addEventListener("load", () => {
+			navigator.serviceWorker
+				.register("/serviceWorker.js")
+				.catch((RegErr) => {
+					console.log("SW Registration failed: ", RegErr);
+				});
+		});
+	}
 </script>

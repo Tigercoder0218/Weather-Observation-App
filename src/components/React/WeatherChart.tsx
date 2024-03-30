@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, createRef, useMemo } from 'react'
+import { createRef } from 'preact'
+import { useState, useEffect, useRef, useMemo } from 'preact/hooks'
 import * as d3 from "d3"
-import { useStore } from '@nanostores/react';
+import { useStore } from '@nanostores/preact';
 import { imperialUnit, weather } from '../../store/weatherStore';
 import useHorizontalScroll from '../../utils/useHorizontalScroll';
 
