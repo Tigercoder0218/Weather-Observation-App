@@ -104,7 +104,7 @@ const WeatherChart = () => {
         // Generate a path line
         const line = d3
             .line<number>()
-            .x((d, i) => xScale(i))
+            .x((_, i) => xScale(i))
             .y((d) => yScale(d))
             .curve(d3.curveMonotoneX);
 
@@ -167,8 +167,8 @@ const WeatherChart = () => {
             .append('text')
             .attr('class', 'temp-label')
             .merge(tempLabels)
-            .attr('x', (d, i) => xScale(i))
-            .attr('y', (d, i) => yScale(d) - 20)
+            .attr('x', (_, i) => xScale(i))
+            .attr('y', (d) => yScale(d) - 20)
             .text(d => `${d}°`)
             .style('text-anchor', 'middle')
             .style('font-size', '0.85em')
@@ -188,10 +188,10 @@ const WeatherChart = () => {
             .append('circle')
             .attr('class', 'point-dot')
             .merge(pointDots)
-            .attr('cx', (d, i) => xScale(i))
-            .attr('cy', (d, i) => yScale(d))
+            .attr('cx', (_, i) => xScale(i))
+            .attr('cy', (d) => yScale(d))
             .attr('r', 0)
-            .attr('fill', (d, i) => {
+            .attr('fill', (_, i) => {
                 return i === 0 ? '#FF6B00' : 'white';
             })
             .attr('stroke', 'white')
@@ -200,7 +200,7 @@ const WeatherChart = () => {
             .delay(600)
             .duration(1000)
             .ease(d3.easeCubicInOut)
-            .attr('r', (d, i) => {
+            .attr('r', (_, i) => {
                 return i === 0 ? 7 : 5;
             })
 
@@ -211,11 +211,11 @@ const WeatherChart = () => {
             .append('image')
             .attr('class', 'point-icon')
             .merge(pointIcons)
-            .attr('x', (d, i) => xScale(i) - 14)
+            .attr('x', (_, i) => xScale(i) - 14)
             .attr('y', height - 65)
             .attr('width', 30)
             .attr('height', 30)
-            .attr('xlink:href', (d, i) => d)
+            .attr('xlink:href', (d) => d)
             .style('opacity', 0)
             .transition()
             .delay(600)

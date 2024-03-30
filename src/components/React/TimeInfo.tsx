@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/react'
 import { weather } from '../../store/weatherStore'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { DateTime } from 'luxon';
 import { MoonIcons, SunriseSVG, SunsetSVG } from '../../assets'
 import * as d3 from "d3"

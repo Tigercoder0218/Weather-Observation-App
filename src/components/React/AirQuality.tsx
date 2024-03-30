@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from '@nanostores/react'
 import { weather } from '../../store/weatherStore'
 
