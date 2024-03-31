@@ -1,9 +1,9 @@
 ---
 import BlurCard from "./BlurCard.astro";
-import { SunChart, TimeCard } from "./React/TimeInfo";
-import { MiscInfo } from "./React/WeatherInfo";
-import WindCard from "./React/WindCard";
-import AirQuality from "./React/AirQuality";
+import { SunChart, TimeCard } from "./Preact/TimeInfo";
+import { MiscInfo } from "./Preact/WeatherInfo";
+import WindCard from "./Preact/WindCard";
+import AirQuality from "./Preact/AirQuality";
 ---
 
 <section class="flex flex-col gap-2 col-span-2 sm:col-auto">
@@ -11,12 +11,12 @@ import AirQuality from "./React/AirQuality";
         <TimeCard client:load />
     </BlurCard>
 
-    <div class="flex gap-2 flex-col lg:flex-row">
-        <div class="flex gap-2">
-            <BlurCard>
+    <div class="flex gap-2 flex-col 1xl:flex-row">
+        <div class="flex gap-2 w-full">
+            <BlurCard className="w-full flex_center">
                 <WindCard client:load />
             </BlurCard>
-            <BlurCard className="pt-0">
+            <BlurCard className="pt-0 w-full">
                 <SunChart client:load />
             </BlurCard>
         </div>
@@ -28,4 +28,3 @@ import AirQuality from "./React/AirQuality";
         <AirQuality client:load />
     </BlurCard>
 </section>
-./Preact/TimeInfo./Preact/WeatherInfo./Preact/WindCard./Preact/AirQuality
