@@ -28,14 +28,14 @@ const WindCard = () => {
         NW: "North-West",
         SE: "South-East",
         SW: "South-West",
-        NNE: "North/#North-East",
-        NNW: "North/#North-West",
-        SSE: "South/#South-East",
-        SSW: "South/#South-West",
-        ENE: "East/#North-East",
-        ESE: "East/#South-East",
-        WNW: "West/#North-West",
-        WSW: "West/#South-West",
+        NNE: "North #(North-East)",
+        NNW: "North #(North-West)",
+        SSE: "South #(South-East)",
+        SSW: "South #(South-West)",
+        ENE: "East #(North-East)",
+        ESE: "East #(South-East)",
+        WNW: "West #(North-West)",
+        WSW: "West #(South-West)",
     } // "#" is just used as a split() identifier
 
     if (isClient && $weather)
@@ -61,8 +61,8 @@ const WindCard = () => {
                         </div>
                     </div>
                     <div className='flex flex-col'>
-                        <span className='text-[0.8em] sm:text-[1em] opacity-95'>Wind from</span>
-                        <span className='sm:hidden text-[1em] sm:text-[1.3em]'>
+                        <span className='text-[0.8em] sm:text-[1em] opacity-95'>Wind direction :</span>
+                        <span className='text-[1em] sm:text-[1.3em]'>
                             {windDir[$weather?.current?.wind_dir || "N"].split("#")?.map((dir, index) => (
                                 // If Wind direction has 2 words, break it into next line for mobile view
                                 <Fragment key={index}>
@@ -71,9 +71,9 @@ const WindCard = () => {
                                 </Fragment>
                             ))}
                         </span>
-                        <span className='hidden sm:block text-[1em] sm:text-[1.3em]'>
+                        {/* <span className='hidden sm:block text-[1em] sm:text-[1.3em]'>
                             {windDir[$weather?.current?.wind_dir || "N"].replace("#", "")}
-                        </span>
+                        </span> */}
                     </div>
                 </div>
             </div>
