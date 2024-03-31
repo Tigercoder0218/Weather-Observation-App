@@ -1,9 +1,9 @@
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { useStore } from '@nanostores/preact'
 import { weather } from '../../store/weatherStore'
-import { useEffect, useRef, useState } from 'preact/hooks'
 import { DateTime } from 'luxon';
 import { MoonIcons, SunriseSVG, SunsetSVG } from '../../assets'
-import * as d3 from "d3"
+import { easeCubicInOut, interpolate, select } from 'd3';
 
 //Formatted Time and Date
 export const TimeCard = () => {
@@ -93,7 +93,7 @@ export const SunChart = () => {
         const elapsedTime = currentTime - sunRiseTime
         const progress = Math.min(Math.max(elapsedTime / totalDuration, 0), 1);
 
-        const svg = d3.select(svgRef.current);
+        const svg = select(svgRef.current);
         svg.selectAll('circle').remove();
 
         const dotOpacity = DotOpacityMap[Math.floor(progress * 10)]
@@ -111,15 +111,15 @@ export const SunChart = () => {
             .transition()
             .delay(500)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .tween('pathTween', function () {
                 const pathEl = svgRef.current ? svgRef.current.querySelector('path') : null
                 const pathLength = pathEl ? pathEl.getTotalLength() : 0;
 
-                const interpolate = d3.interpolate(0, pathLength * progress);
+                const Interpolate = interpolate(0, pathLength * progress);
 
                 return function (t: number) {
-                    const distance = interpolate(t);
+                    const distance = Interpolate(t);
                     if (!isFinite(distance)) return;
                     const point = pathEl ? pathEl?.getPointAtLength(distance) : null;
 

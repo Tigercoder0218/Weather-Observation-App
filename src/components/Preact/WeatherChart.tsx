@@ -1,9 +1,9 @@
 import { createRef } from 'preact'
 import { useState, useEffect, useRef, useMemo } from 'preact/hooks'
-import * as d3 from "d3"
 import { useStore } from '@nanostores/preact';
 import { imperialUnit, weather } from '../../store/weatherStore';
 import useHorizontalScroll from '../../utils/useHorizontalScroll';
+import { scaleLinear, max, line, curveMonotoneX, select, easeCubicInOut, interpolate, axisBottom } from "d3"
 
 const WeatherChart = () => {
     const $weather = useStore(weather)
@@ -91,26 +91,23 @@ const WeatherChart = () => {
         const width = SvgRef?.current?.clientWidth || 800;
         const height = SvgRef?.current?.clientHeight || 500
 
-        const xScale = d3
-            .scaleLinear()
+        const xScale = scaleLinear()
             .domain([0, data.length - 1])
             .range([marginLeft, width - marginRight]);
 
-        const maxValue = d3.max(data) || 100
-        const yScale = d3
-            .scaleLinear()
+        const maxValue = max(data) || 100
+        const yScale = scaleLinear()
             .domain([0, maxValue + 5 || 100])
             .range([height - marginBottom, marginTop]);
 
         // Generate a path line
-        const line = d3
-            .line<number>()
+        const pathLine = line<number>()
             .x((_, i) => xScale(i))
             .y((d) => yScale(d))
-            .curve(d3.curveMonotoneX);
+            .curve(curveMonotoneX);
 
         // Init SVG element
-        const svg = d3.select(SvgRef.current);
+        const svg = select(SvgRef.current);
 
         // Clear previous path before redraw
         svg.selectAll("path").remove();
@@ -119,23 +116,23 @@ const WeatherChart = () => {
         svg
             .append('path')
             .datum(data)
-            .attr('d', line)
+            .attr('d', pathLine)
             .attr('fill', 'none')
             .attr('stroke', '#fff')
             .attr('stroke-width', 3)
             .transition()
             .duration(2000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .attrTween('stroke-dasharray', function () {
                 const length: number = this.getTotalLength();
                 return function (t) {
-                    return (d3.interpolate('0,' + length, length + ',' + length))(t);
+                    return (interpolate('0,' + length, length + ',' + length))(t);
                 };
             });
 
         // Adding X-axis label on bottom
         const hours = new Date($weather?.location?.localtime as string).getHours() // Current Hour
-        const tickLabel = d3.axisBottom(xScale).ticks(24).tickFormat((d, i) => {
+        const tickLabel = axisBottom(xScale).ticks(24).tickFormat((d, i) => {
             let time = i + hours
             if (d == 0) {
                 return "Now"
@@ -178,7 +175,7 @@ const WeatherChart = () => {
             .transition()
             .delay(600)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .style('opacity', 1)
 
 
@@ -200,7 +197,7 @@ const WeatherChart = () => {
             .transition()
             .delay(600)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .attr('r', (_, i) => {
                 return i === 0 ? 7 : 5;
             })
@@ -221,7 +218,7 @@ const WeatherChart = () => {
             .transition()
             .delay(600)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .style('opacity', 1)
     }
 
