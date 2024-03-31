@@ -1,4 +1,4 @@
-import { toast } from "react-hot-toast"
+import { toastData } from "../store/weatherStore"
 
 interface LocationType {
     latitude: string,
@@ -25,7 +25,10 @@ export const FetchWeatherQuery = async (query: string) => {
         if (!data.error) {
             return data
         } else {
-            toast.error("Invalid City name!")
+            toastData.set({
+                status: "error",
+                message: "Invalid City name!"
+            })
             throw new Error("Invalid City name!");
         }
     } catch (err) {
@@ -50,7 +53,10 @@ export const FetchWeatherPosition = async (pos: LocationType) => {
         if (!data.error) {
             return data
         } else {
-            toast.error("Invalid Position coordinates!")
+            toastData.set({
+                status: "error",
+                message: "Invalid Position coordinates!"
+            })
             throw new Error("Invalid Position coordinates!");
         }
     } catch (err) {
