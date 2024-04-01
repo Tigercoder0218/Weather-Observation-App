@@ -15,7 +15,4 @@ type ToastType = {
     toastID?: number,
 }
 
-export const toastData = atom<ToastType | null>({
-    status: "success",
-    message: "Tester bro"
-})
+export const toastData = atom<ToastType | null>(null)
