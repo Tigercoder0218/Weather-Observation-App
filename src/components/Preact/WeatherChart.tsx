@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef, createRef, useMemo } from 'react'
-import * as d3 from "d3"
-import { useStore } from '@nanostores/react';
+import { createRef } from 'preact'
+import { useState, useEffect, useRef, useMemo } from 'preact/hooks'
+import { useStore } from '@nanostores/preact';
 import { imperialUnit, weather } from '../../store/weatherStore';
 import useHorizontalScroll from '../../utils/useHorizontalScroll';
+import { scaleLinear, max, line, curveMonotoneX, select, easeCubicInOut, interpolate, axisBottom, min } from "d3"
 
 const WeatherChart = () => {
     const $weather = useStore(weather)
@@ -83,6 +84,8 @@ const WeatherChart = () => {
     const renderD3Chart = () => {
         if (!data.length || !iconData.length || !SvgRef.current) return;
 
+        console.log("Graph", min(data), max(data))
+
         const marginTop = $imperialUnit ? 30 : 20;
         const marginRight = 20;
         const marginBottom = 30;
@@ -90,26 +93,25 @@ const WeatherChart = () => {
         const width = SvgRef?.current?.clientWidth || 800;
         const height = SvgRef?.current?.clientHeight || 500
 
-        const xScale = d3
-            .scaleLinear()
+        const xScale = scaleLinear()
             .domain([0, data.length - 1])
             .range([marginLeft, width - marginRight]);
 
-        const maxValue = d3.max(data) || 100
-        const yScale = d3
-            .scaleLinear()
-            .domain([0, maxValue + 5 || 100])
+        const minValue = min(data) || 0;
+        const maxValue = max(data) || 100
+
+        const yScale = scaleLinear()
+            .domain([Math.min(minValue, 0) - 10, maxValue + 5])
             .range([height - marginBottom, marginTop]);
 
         // Generate a path line
-        const line = d3
-            .line<number>()
-            .x((d, i) => xScale(i))
+        const pathLine = line<number>()
+            .x((_, i) => xScale(i))
             .y((d) => yScale(d))
-            .curve(d3.curveMonotoneX);
+            .curve(curveMonotoneX);
 
         // Init SVG element
-        const svg = d3.select(SvgRef.current);
+        const svg = select(SvgRef.current);
 
         // Clear previous path before redraw
         svg.selectAll("path").remove();
@@ -118,23 +120,23 @@ const WeatherChart = () => {
         svg
             .append('path')
             .datum(data)
-            .attr('d', line)
+            .attr('d', pathLine)
             .attr('fill', 'none')
             .attr('stroke', '#fff')
             .attr('stroke-width', 3)
             .transition()
             .duration(2000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .attrTween('stroke-dasharray', function () {
                 const length: number = this.getTotalLength();
                 return function (t) {
-                    return (d3.interpolate('0,' + length, length + ',' + length))(t);
+                    return (interpolate('0,' + length, length + ',' + length))(t);
                 };
             });
 
         // Adding X-axis label on bottom
         const hours = new Date($weather?.location?.localtime as string).getHours() // Current Hour
-        const tickLabel = d3.axisBottom(xScale).ticks(24).tickFormat((d, i) => {
+        const tickLabel = axisBottom(xScale).ticks(24).tickFormat((d, i) => {
             let time = i + hours
             if (d == 0) {
                 return "Now"
@@ -167,8 +169,8 @@ const WeatherChart = () => {
             .append('text')
             .attr('class', 'temp-label')
             .merge(tempLabels)
-            .attr('x', (d, i) => xScale(i))
-            .attr('y', (d, i) => yScale(d) - 20)
+            .attr('x', (_, i) => xScale(i))
+            .attr('y', (d) => yScale(d) - 20)
             .text(d => `${d}°`)
             .style('text-anchor', 'middle')
             .style('font-size', '0.85em')
@@ -177,7 +179,7 @@ const WeatherChart = () => {
             .transition()
             .delay(600)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .style('opacity', 1)
 
 
@@ -188,10 +190,10 @@ const WeatherChart = () => {
             .append('circle')
             .attr('class', 'point-dot')
             .merge(pointDots)
-            .attr('cx', (d, i) => xScale(i))
-            .attr('cy', (d, i) => yScale(d))
+            .attr('cx', (_, i) => xScale(i))
+            .attr('cy', (d) => yScale(d))
             .attr('r', 0)
-            .attr('fill', (d, i) => {
+            .attr('fill', (_, i) => {
                 return i === 0 ? '#FF6B00' : 'white';
             })
             .attr('stroke', 'white')
@@ -199,8 +201,8 @@ const WeatherChart = () => {
             .transition()
             .delay(600)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
-            .attr('r', (d, i) => {
+            .ease(easeCubicInOut)
+            .attr('r', (_, i) => {
                 return i === 0 ? 7 : 5;
             })
 
@@ -211,16 +213,16 @@ const WeatherChart = () => {
             .append('image')
             .attr('class', 'point-icon')
             .merge(pointIcons)
-            .attr('x', (d, i) => xScale(i) - 14)
+            .attr('x', (_, i) => xScale(i) - 14)
             .attr('y', height - 65)
             .attr('width', 30)
             .attr('height', 30)
-            .attr('xlink:href', (d, i) => d)
+            .attr('xlink:href', (d) => d)
             .style('opacity', 0)
             .transition()
             .delay(600)
             .duration(1000)
-            .ease(d3.easeCubicInOut)
+            .ease(easeCubicInOut)
             .style('opacity', 1)
     }
 
@@ -235,7 +237,7 @@ const WeatherChart = () => {
             </div>
 
             <div className="overflow-x-auto cursor-grab active:cursor-grabbing" ref={ChartContainerRef}>
-                <svg ref={SvgRef} className='w-[400%] md:w-[250%] lg:w-[150%] h-fit select-none'>
+                <svg ref={SvgRef} className='w-[400%] md:w-[250%] lg:w-[150%] min-h-max select-none'>
                     <g className="x-axis" />
                 </svg>
             </div>

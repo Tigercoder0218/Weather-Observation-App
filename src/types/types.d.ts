@@ -1,3 +1,5 @@
+declare module 'luxon';
+
 type AirQualityType = {
     co: number,
     no2: number,

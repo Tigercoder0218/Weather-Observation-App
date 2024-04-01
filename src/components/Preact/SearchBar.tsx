@@ -1,16 +1,15 @@
-import type { FormEvent } from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'preact/hooks'
 import { FetchWeatherQuery, FetchWeatherPosition } from '../../hooks/useFetchWeather';
 import MapPin from '../SVG/MapPin';
-import { weather } from '../../store/weatherStore';
-import { toast } from 'react-hot-toast';
+import { toastData, weather } from '../../store/weatherStore';
 import { useIconCode } from '../../hooks/useIconCode';
+
 
 const SearchBar = () => {
     const [query, setQuery] = useState<string>("mangalore")
     const SearchRef = useRef<HTMLInputElement>(null)
 
-    const HandleSearch = async (e?: FormEvent<HTMLFormElement>) => {
+    const HandleSearch = async (e?: Event) => {
         e?.preventDefault()
         if (!query) return
 
@@ -41,13 +40,29 @@ const SearchBar = () => {
     const handleError = (error: any) => {
         console.log("Error:", error);
         switch (error.code) {
-            case error.PERMISSION_DENIED: toast.error(error.message)
+            case error.PERMISSION_DENIED:
+                toastData.set({
+                    status: "error",
+                    message: error.message
+                })
                 break;
-            case error.POSITION_UNAVAILABLE: toast.error(error.message)
+            case error.POSITION_UNAVAILABLE:
+                toastData.set({
+                    status: "error",
+                    message: error.message
+                })
                 break;
-            case error.TIMEOUT: toast.error(error.message)
+            case error.TIMEOUT:
+                toastData.set({
+                    status: "error",
+                    message: error.message
+                })
                 break;
-            default: toast.error(error.message)
+            default:
+                toastData.set({
+                    status: "error",
+                    message: error.message
+                })
         }
 
         // If geolocation access is denied, fetch results for "mangalore" by default
@@ -67,7 +82,10 @@ const SearchBar = () => {
                 { enableHighAccuracy: true, maximumAge: 10000 })
         } else {
             console.log("No GeoLocation Support")
-            toast.error("No GeoLocation Support")
+            toastData.set({
+                status: "error",
+                message: "No GeoLocation Support"
+            })
         }
     };
 

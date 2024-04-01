@@ -1,4 +1,4 @@
-import { useStore } from "@nanostores/react";
+import { useStore } from "@nanostores/preact";
 import { WeatherIcons } from "../../assets/icons";
 import { imageCode, imperialUnit, weather } from "../../store/weatherStore";
 

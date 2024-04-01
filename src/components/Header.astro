@@ -1,16 +1,17 @@
 ---
-import SearchBar from "./React/SearchBar";
+import { Image } from "astro:assets";
 import { VortexSVG } from "../assets";
+import SearchBar from "./Preact/SearchBar";
 ---
 
 <header
 	class="flex gap-4 sm:justify-between items-center mx-4 my-2 px-2 py-2 overflow-hidden bg-black/20 backdrop-blur-md rounded-lg"
 >
 	<div class="flex_center gap-4">
-		<img
-			src={VortexSVG.src}
-			width="40px"
-			height="40px"
+		<Image
+			src={VortexSVG}
+			width="40"
+			height="40"
 			alt="Vortexa_Logo"
 			class="animate-[spin_2s_linear_infinite_reverse]"
 		/>
@@ -44,6 +45,6 @@ import { VortexSVG } from "../assets";
 
 <style>
 	.link {
-		@apply px-2 rounded text-[1.1em] hover:translate-y-[-0.25em] transition-transform;
+		@apply px-2 rounded text-[1.1em] hover:translate-y-[-0.1em] transition-transform;
 	}
 </style>

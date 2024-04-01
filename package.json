@@ -10,22 +10,21 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.2",
-    "@astrojs/tailwind": "^5.0.0",
-    "@nanostores/react": "^0.7.1",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "astro": "^3.0.13",
-    "d3": "^7.8.5",
-    "luxon": "^3.4.3",
-    "nanostores": "^0.9.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.4.1",
-    "tailwindcss": "^3.3.3"
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/preact": "^3.1.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "@nanostores/preact": "^0.5.1",
+    "astro": "^4.5.12",
+    "d3": "^7.9.0",
+    "luxon": "^3.4.4",
+    "nanostores": "^0.10.0",
+    "preact": "^10.20.1",
+    "sharp": "^0.33.3",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.3"
   },
   "devDependencies": {
-    "@types/d3": "^7.4.1",
-    "@types/luxon": "^3.3.2"
+    "@types/d3": "^7.4.3",
+    "@types/luxon": "^3.4.2"
   }
 }

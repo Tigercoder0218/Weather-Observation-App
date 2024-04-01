@@ -1,5 +1,5 @@
-import { useStore } from '@nanostores/react'
-import { useEffect, useState } from 'react'
+import { useStore } from '@nanostores/preact'
+import { useEffect, useState } from 'preact/hooks'
 import { imageCode } from '../../store/weatherStore'
 import CloudSVG from '../SVG/CloudSVG'
 import LogoSVG from '../SVG/LogoSVG'
