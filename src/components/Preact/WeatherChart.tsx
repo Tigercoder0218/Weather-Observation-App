@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useMemo } from 'preact/hooks'
 import { useStore } from '@nanostores/preact';
 import { imperialUnit, weather } from '../../store/weatherStore';
 import useHorizontalScroll from '../../utils/useHorizontalScroll';
-import { scaleLinear, max, line, curveMonotoneX, select, easeCubicInOut, interpolate, axisBottom } from "d3"
+import { scaleLinear, max, line, curveMonotoneX, select, easeCubicInOut, interpolate, axisBottom, min } from "d3"
 
 const WeatherChart = () => {
     const $weather = useStore(weather)
@@ -84,6 +84,8 @@ const WeatherChart = () => {
     const renderD3Chart = () => {
         if (!data.length || !iconData.length || !SvgRef.current) return;
 
+        console.log("Graph", min(data), max(data))
+
         const marginTop = $imperialUnit ? 30 : 20;
         const marginRight = 20;
         const marginBottom = 30;
@@ -95,9 +97,11 @@ const WeatherChart = () => {
             .domain([0, data.length - 1])
             .range([marginLeft, width - marginRight]);
 
+        const minValue = min(data) || 0;
         const maxValue = max(data) || 100
+
         const yScale = scaleLinear()
-            .domain([0, maxValue + 5 || 100])
+            .domain([Math.min(minValue, 0) - 10, maxValue + 5])
             .range([height - marginBottom, marginTop]);
 
         // Generate a path line
@@ -233,7 +237,7 @@ const WeatherChart = () => {
             </div>
 
             <div className="overflow-x-auto cursor-grab active:cursor-grabbing" ref={ChartContainerRef}>
-                <svg ref={SvgRef} className='w-[400%] md:w-[250%] lg:w-[150%] h-fit select-none'>
+                <svg ref={SvgRef} className='w-[400%] md:w-[250%] lg:w-[150%] min-h-max select-none'>
                     <g className="x-axis" />
                 </svg>
             </div>
