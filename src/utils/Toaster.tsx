@@ -20,12 +20,12 @@ export const Toaster = () => {
 
     return (
         <div className="fixed top-0 left-1/2 -translate-x-1/2 z-[9]">
-            <div style={styles} className="relative flex justify-evenly items-center gap-4 bg-white w-fit h-fit px-4 py-2 rounded transition-all duration-300 ease-in-out">
-                {$toastData?.status == "success" && <span className="text-[1.1em]">✅</span>}
-                {$toastData?.status == "error" && <span className="text-[1.1em]">❌</span>}
-                {$toastData?.status == "warn" && <span className="text-[1.1em]">⚠️</span>}
+            <div style={styles} className="relative flex justify-evenly items-center gap-4 bg-white w-fit h-fit px-3 py-2 rounded transition-all duration-300 ease-in-out">
+                {$toastData?.status == "success" && <span>✅</span>}
+                {$toastData?.status == "error" && <span>❌</span>}
+                {$toastData?.status == "warn" && <span>⚠️</span>}
 
-                <span className="text-black text-[1.1em] font-medium">{$toastData?.message}</span>
+                <span className="text-black font-medium">{$toastData?.message}</span>
             </div>
         </div>
     )
