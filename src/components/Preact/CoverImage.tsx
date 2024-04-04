@@ -30,12 +30,14 @@ const CoverImage = ({ background = false }: Props) => {
                         src={MobileImg[$imageCode]?.src}
                         alt="BG_Img"
                         draggable={false}
+                        loading="eager"
                         className={background ? "lg:hidden w-full h-screen fixed top-0 object-cover opacity-75" : "lg:hidden w-full h-full object-cover"} />
                         :
                         <img
                             src={DesktopImg[$imageCode]?.src}
                             alt="BG_Img"
                             draggable={false}
+                            loading="eager"
                             className={background ? "hidden lg:block w-full h-screen fixed top-0 object-cover opacity-75" : "hidden lg:block w-full h-full object-cover"} />
                 }
             </div>
