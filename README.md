@@ -4,11 +4,6 @@
 # Vortexa - Weather App
 Explore comprehensive weather insights and forecasts with Vortexa. Stay informed about current conditions, forecasts, and meteorological data, and gain valuable insights into weather patterns and trends.
 
-#### This is the upgraded version of CliMate weather app
-Old version Demo: https://klimate.netlify.app/
-
-Old version Github: https://github.com/ChiragChrg/CliMate
-
 ### Live Demo
 
 Check out a live demo of VORTEXA at https://vortexa.netlify.app/.
@@ -26,10 +21,10 @@ Check out a live demo of VORTEXA at https://vortexa.netlify.app/.
         src="https://raw.githubusercontent.com/ChiragChrg/ChiragChrg.github.io/main/icons/astrojs.svg"
       />
       <img
-        alt="React JS"
-        title="React JS"
+        alt="Preact JS"
+        title="Preact JS"
         width="40px"
-        src="https://raw.githubusercontent.com/ChiragChrg/ChiragChrg.github.io/main/icons/reactjs.svg"
+        src="https://raw.githubusercontent.com/ChiragChrg/ChiragChrg.github.io/main/icons/preactjs.svg"
       />
       <img 
         alt="Typescript" 
@@ -62,3 +57,9 @@ Check out a live demo of VORTEXA at https://vortexa.netlify.app/.
         src="https://raw.githubusercontent.com/ChiragChrg/ChiragChrg.github.io/main/icons/database.svg" 
       />
 </div>
+
+
+## This is the upgraded version of CliMate weather app
+Old version Demo: https://klimate.netlify.app/
+
+Old version Github: https://github.com/ChiragChrg/CliMate
