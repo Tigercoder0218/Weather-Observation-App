@@ -84,14 +84,12 @@ const WeatherChart = () => {
     const renderD3Chart = () => {
         if (!data.length || !iconData.length || !SvgRef.current) return;
 
-        console.log("Graph", min(data), max(data))
-
         const marginTop = $imperialUnit ? 30 : 20;
         const marginRight = 20;
         const marginBottom = 30;
         const marginLeft = 20;
         const width = SvgRef?.current?.clientWidth || 800;
-        const height = SvgRef?.current?.clientHeight || 500
+        const height = SvgRef?.current?.clientHeight || 300
 
         const xScale = scaleLinear()
             .domain([0, data.length - 1])
@@ -102,12 +100,12 @@ const WeatherChart = () => {
 
         const yScale = scaleLinear()
             .domain([Math.min(minValue, 0) - 10, maxValue + 5])
-            .range([height - marginBottom, marginTop]);
+            .range([height - marginBottom, marginTop])
 
         // Generate a path line
         const pathLine = line<number>()
             .x((_, i) => xScale(i))
-            .y((d) => yScale(d))
+            .y((d) => yScale(Math.round(d)))
             .curve(curveMonotoneX);
 
         // Init SVG element
@@ -144,8 +142,8 @@ const WeatherChart = () => {
                 // if i+ hour is > than 24, rest xaxis label to start from 1
                 return "0 AM"
             } else if (time > 24) {
-                // Its the new Day after 24, Tommorrows Time Cacl
-                // if time is > than 24, rest xaxis label to start from 1
+                // Its a new Day after 24, Tommorrows Time Cacl
+                // if time is > than 24, reset xaxis label to start from 1
                 let newTime = time - 24
                 return newTime == 12 ? `${newTime} PM` :
                     newTime > 12 ?
@@ -171,7 +169,7 @@ const WeatherChart = () => {
             .merge(tempLabels)
             .attr('x', (_, i) => xScale(i))
             .attr('y', (d) => yScale(d) - 20)
-            .text(d => `${d}°`)
+            .text(d => `${Math.round(d)}°`)
             .style('text-anchor', 'middle')
             .style('font-size', '0.85em')
             .style('fill', 'white')
